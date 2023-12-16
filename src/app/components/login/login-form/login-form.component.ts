@@ -1,55 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
-
+import {RouteManager} from "../../../shared/route-manager";
+import {emailValidator} from "../../../shared/validators/email.validator";
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-  public registrationForm: FormGroup | null = null;
+  public readonly RouteManager = RouteManager;
+  public loginForm: FormGroup | null = null;
   constructor(private formBuilder: FormBuilder,
-              private toastr: ToastrService) { }
-
-  ngOnInit(): void {
+              private toastr: ToastrService) {
+  }
+  ngOnInit() {
     this.initForm();
   }
 
-  public get firstNameFormControl(): FormControl {
-    return <FormControl>this.registrationForm?.get('firstName');
-  }
-
-  public get lastNameFormControl(): FormControl {
-    return <FormControl>this.registrationForm?.get('lastName');
-  }
-
   public get emailFormControl(): FormControl {
-    return <FormControl>this.registrationForm?.get('email');
+    return <FormControl>this.loginForm?.get('email');
   }
 
   public get passwordFormControl(): FormControl {
-    return <FormControl>this.registrationForm?.get('password');
+    return <FormControl>this.loginForm?.get('password');
   }
 
-  public get phoneNumberFormControl(): FormControl {
-    return <FormControl>this.registrationForm?.get('phoneNumber');
-  }
-  private initForm(): void {
-    this.registrationForm = this.formBuilder.group({
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, Validators.required],
-      phoneNumber: [null]
-    });
-  }
-
-  public submitForm(): void {
-    if (this.registrationForm?.invalid) {
+  public login(): void {
+    if (this.loginForm?.invalid) {
       this.toastr.info('Uzupełnij wszystkie wymagane pola');
-      this.registrationForm.markAllAsTouched();
+      this.loginForm.markAllAsTouched();
       return;
     }
+  }
+
+  private initForm(): void {
+    this.loginForm = this.formBuilder.group({
+      email: [null, [Validators.required, emailValidator()]],
+      password: [null, Validators.required]
+    });
   }
 }

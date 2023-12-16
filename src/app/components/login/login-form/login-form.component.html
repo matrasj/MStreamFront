@@ -1,20 +1,6 @@
 <div class="form-con">
   <div class="form-container">
-    <div class="row mb-2 max-w-input">
-      <mat-form-field>
-        <input matInput
-               placeholder="Podaj imię..."
-               [formControl]="firstNameFormControl"/>
-      </mat-form-field>
-    </div>
-
-    <div class="row mb-2 max-w-input">
-      <mat-form-field>
-        <input matInput
-               placeholder="Podaj nazwisko..."
-               [formControl]="lastNameFormControl"/>
-      </mat-form-field>
-    </div>
+    <h2>Logowanie</h2>
 
     <div class="row mb-2 max-w-input">
       <mat-form-field>
@@ -27,23 +13,31 @@
     <div class="row mb-2 max-w-input">
       <mat-form-field>
         <input matInput
-               placeholder="Password"
+               placeholder="Podaj hasło..."
                [formControl]="passwordFormControl"
                [type]="'password'"/>
       </mat-form-field>
     </div>
 
-    <div class="row mb-2 max-w-input">
-      <mat-form-field>
-        <input matInput
-               placeholder="Telefon"
-               [formControl]="phoneNumberFormControl"
-               [type]="'phoneNumber'"/>
-      </mat-form-field>
+    <button class="mb-5" mat-raised-button color="primary"
+            (click)="login()">Zaloguj się</button>
+
+    <div class="d-flex align-items-center mb-4">
+      <p class="me-2 mb-0">
+        Nie masz jeszcze konta?
+      </p>
+      <a [routerLink]="RouteManager.getRegister()">
+        <button mat-raised-button color="primary">Zajerestruj się</button>
+      </a>
     </div>
 
-    <button mat-raised-button color="primary"
-            (click)="submitForm()">Zajerestruj</button>
+    <div class="d-flex align-items-center">
+      <p class="me-2 mb-0">
+        Zapomniałeś hasła?
+      </p>
+      <a [routerLink]="RouteManager.getRecoverPassword()">
+        <button mat-raised-button color="primary">Przypomnij hasło</button>
+      </a>
+    </div>
   </div>
-
 </div>

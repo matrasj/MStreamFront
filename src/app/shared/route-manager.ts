@@ -21,4 +21,8 @@ export class RouteManager {
   public static getRegister(): string[] {
     return RouteManager.getHome().concat(['register']);
   }
+
+  public static getRecoverPassword(): string[] {
+    return RouteManager.getHome().concat(['recover-password']);
+  }
 }

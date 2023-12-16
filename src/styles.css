@@ -1,4 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
-
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.max-w-input {
+  width: 100%;
+}
+
+.form-con {
+  padding: 4rem 15rem;
+}
+
+.form-container {
+  padding: 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 8px;
+}
