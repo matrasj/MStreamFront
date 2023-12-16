@@ -1,0 +1,15 @@
+<header class="navbar">
+  <div class="logo">
+    <img src="assets/images/logo.png" alt="Logo">
+  </div>
+  <div class="nav-links" [class.responsive]="showMenu">
+    <a routerLink="/">Home</a>
+    <a routerLink="/about">About</a>
+    <a routerLink="/services">Services</a>
+    <a routerLink="/contact">Contact</a>
+  </div>
+  <button class="hamburger" (click)="toggleMenu()">
+    <mat-icon *ngIf="!showMenu">menu</mat-icon>
+    <mat-icon *ngIf="showMenu">close</mat-icon>
+  </button>
+</header>
