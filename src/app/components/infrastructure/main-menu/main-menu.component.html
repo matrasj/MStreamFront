@@ -1,0 +1,18 @@
+<header class="navbar">
+  <div class="logo">
+    <a [routerLink]="RouteManager.getHome()">
+      <img src="../../../../assets/images/logo.png" alt="Logo">
+    </a>
+  </div>
+
+  <div class="nav-links" [class.responsive]="showMenu">
+    <a [routerLink]="RouteManager.getCourses()">Kursy</a>
+    <a [routerLink]="RouteManager.getRecruitmentQuestions()">Pytania rekrutacyjne</a>
+    <a [routerLink]="RouteManager.getNewsletter()">Newsletter</a>
+    <a [routerLink]="RouteManager.getLogin()">Zaloguj się</a>
+  </div>
+  <button class="hamburger" (click)="toggleMenu()">
+    <mat-icon *ngIf="!showMenu">menu</mat-icon>
+    <mat-icon *ngIf="showMenu">close</mat-icon>
+  </button>
+</header>

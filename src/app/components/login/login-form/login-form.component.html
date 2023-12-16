@@ -1,0 +1,49 @@
+<div class="form-con">
+  <div class="form-container">
+    <div class="row mb-2 max-w-input">
+      <mat-form-field>
+        <input matInput
+               placeholder="Podaj imię..."
+               [formControl]="firstNameFormControl"/>
+      </mat-form-field>
+    </div>
+
+    <div class="row mb-2 max-w-input">
+      <mat-form-field>
+        <input matInput
+               placeholder="Podaj nazwisko..."
+               [formControl]="lastNameFormControl"/>
+      </mat-form-field>
+    </div>
+
+    <div class="row mb-2 max-w-input">
+      <mat-form-field>
+        <input matInput
+               placeholder="Podaj email..."
+               [formControl]="emailFormControl"/>
+      </mat-form-field>
+    </div>
+
+    <div class="row mb-2 max-w-input">
+      <mat-form-field>
+        <input matInput
+               placeholder="Password"
+               [formControl]="passwordFormControl"
+               [type]="'password'"/>
+      </mat-form-field>
+    </div>
+
+    <div class="row mb-2 max-w-input">
+      <mat-form-field>
+        <input matInput
+               placeholder="Telefon"
+               [formControl]="phoneNumberFormControl"
+               [type]="'phoneNumber'"/>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary"
+            (click)="submitForm()">Zajerestruj</button>
+  </div>
+
+</div>
