@@ -1,49 +1,67 @@
 <div class="form-con">
   <div class="form-container">
     <h2>Rejestracja</h2>
-    <div class="row mb-2 max-w-input">
-      <mat-form-field>
-        <input matInput
-               placeholder="Podaj imię..."
-               [formControl]="firstNameFormControl"/>
-      </mat-form-field>
-    </div>
+    <ng-container *ngIf="componentState !== ComponentStateEnum.LOADING; else loader">
+      <div class="row mb-2 max-w-input">
+        <mat-form-field>
+          <input matInput
+                 placeholder="Podaj imię..."
+                 [formControl]="firstNameFormControl"/>
+        </mat-form-field>
+      </div>
 
-    <div class="row mb-2 max-w-input">
-      <mat-form-field>
-        <input matInput
-               placeholder="Podaj nazwisko..."
-               [formControl]="lastNameFormControl"/>
-      </mat-form-field>
-    </div>
+      <div class="row mb-2 max-w-input">
+        <mat-form-field>
+          <input matInput
+                 placeholder="Podaj nazwisko..."
+                 [formControl]="lastNameFormControl"/>
+        </mat-form-field>
+      </div>
 
-    <div class="row mb-2 max-w-input">
-      <mat-form-field>
-        <input matInput
-               placeholder="Podaj email..."
-               [formControl]="emailFormControl"/>
-      </mat-form-field>
-    </div>
+      <div class="row mb-2 max-w-input">
+        <mat-form-field>
+          <input matInput
+                 placeholder="Podaj email..."
+                 [formControl]="emailFormControl"/>
+        </mat-form-field>
+      </div>
 
-    <div class="row mb-2 max-w-input">
-      <mat-form-field>
-        <input matInput
-               placeholder="Podaj hasło..."
-               [formControl]="passwordFormControl"
-               [type]="'password'"/>
-      </mat-form-field>
-    </div>
+      <div class="row mb-2 max-w-input">
+        <mat-form-field>
+          <input matInput
+                 placeholder="Podaj hasło..."
+                 [formControl]="passwordFormControl"
+                 [type]="'password'"/>
+        </mat-form-field>
+      </div>
 
-    <div class="row mb-2 max-w-input">
-      <mat-form-field>
-        <input matInput
-               placeholder="Telefon"
-               [formControl]="phoneNumberFormControl"
-               [type]="'phoneNumber'"/>
-      </mat-form-field>
-    </div>
+      <div class="row mb-2 max-w-input">
+        <mat-form-field>
+          <input matInput
+                 placeholder="Telefon"
+                 [formControl]="phoneNumberFormControl"
+                 [type]="'phoneNumber'"/>
+        </mat-form-field>
+      </div>
 
-    <button mat-raised-button color="primary"
-            (click)="submitForm()">Zajerestruj się</button>
+      <button mat-raised-button color="primary"
+              class="mb-5"
+              (click)="submitForm()">
+        Zajerestruj się
+      </button>
+
+      <div class="d-flex align-items-center">
+        <p class="me-2 mb-0">
+          Masz już konto?
+        </p>
+        <a [routerLink]="RouteManager.getLogin()">
+          <button mat-raised-button color="primary">Zaloguj się</button>
+        </a>
+      </div>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
+import {RouteManager} from 'src/app/shared/route-manager';
 import {emailValidator} from "../../../shared/validators/email.validator";
+import {ComponentStateEnum} from "../../../enums/component-state.enum";
+import {UserAccountService} from "../../../services/user-account.service";
+import {RegistrationRequestModel} from "../../../models/registration/registration-request.model";
+import {finalize} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-register-form',
@@ -9,9 +15,15 @@ import {emailValidator} from "../../../shared/validators/email.validator";
   styleUrls: ['./register-form.component.css']
 })
 export class RegisterFormComponent implements OnInit {
+  public readonly RouteManager = RouteManager;
+  public readonly ComponentStateEnum = ComponentStateEnum;
+  public componentState = ComponentStateEnum.CREATE;
+  public showInfoAboutCheckingMail: boolean = false;
   public registrationForm: FormGroup | null = null;
   constructor(private formBuilder: FormBuilder,
-              private toastr: ToastrService) { }
+              private httpClient: HttpClient,
+              private toastr: ToastrService,
+              private userAccountService: UserAccountService) { }
 
   ngOnInit(): void {
     this.initForm();
@@ -52,5 +64,24 @@ export class RegisterFormComponent implements OnInit {
       this.registrationForm.markAllAsTouched();
       return;
     }
+
+    this.componentState = ComponentStateEnum.LOADING;
+    this.userAccountService.registerAccount({
+      email: this.emailFormControl.value,
+      password: this.passwordFormControl.value,
+      firstname: this.firstNameFormControl.value,
+      lastname: this.lastNameFormControl.value,
+      phoneNumber: this.phoneNumberFormControl.value
+    } as RegistrationRequestModel).pipe(
+      finalize(() => this.componentState = ComponentStateEnum.CREATE)
+    ).subscribe({
+      next: (res) => {
+        this.toastr.success('Pomyślnie utworzono konto');
+        this.showInfoAboutCheckingMail = true;
+      },
+      error: (err) => {
+        this.toastr.error('Wystąpił błąd podczas tworzenia użytkownika')
+      }
+    })
   }
 }

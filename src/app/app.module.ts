@@ -21,6 +21,8 @@ import {
   RecruitmentQuestionsSidebarComponent
 } from "./components/recruitment-question/recruitment-questions-sidebar/recruitment-questions-sidebar.component";
 import { RecoverPasswordComponent } from './components/login/recover-password/recover-password.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 const routes: Routes = [
   { path: "recruitment-questions", component: RecruitmentQuestionsComponent},
@@ -38,19 +40,25 @@ const routes: Routes = [
     RecruitmentQuestionsComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    RecoverPasswordComponent
+    RecoverPasswordComponent,
+    LoaderComponent
   ],
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(routes),
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    ToastrModule.forRoot()
-  ],
+    imports: [
+        BrowserModule,
+        RouterModule.forRoot(routes, {
+          useHash: true,
+          relativeLinkResolution: 'legacy',
+          paramsInheritanceStrategy: 'always'
+        }),
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+        ToastrModule.forRoot(),
+        MatProgressSpinnerModule
+    ],
   providers: [
   ],
   bootstrap: [AppComponent]
