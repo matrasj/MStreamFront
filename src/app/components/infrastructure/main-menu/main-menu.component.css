@@ -4,7 +4,6 @@
   align-items: center;
   padding: 1rem 3rem;
   background-color: #fffdf7;
-  color: #333;
   position: relative;
   z-index: 2;
 }
@@ -17,12 +16,6 @@
   display: flex;
 }
 
-.nav-links a {
-  color: #333;
-  text-decoration: none;
-  margin-left: 20px;
-}
-
 .hamburger {
   display: none;
   background: none;
@@ -32,7 +25,6 @@
 }
 
 .mat-icon {
-  color: #333;
   font-size: 24px;
 }
 
@@ -55,12 +47,6 @@
     left: 0;
     width: 100%;
     background-color: #fffdf7;
-  }
-
-  .nav-links a {
-    margin: 0;
-    padding: 15px;
-    text-align: center;
   }
 
   .hamburger {

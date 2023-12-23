@@ -23,12 +23,31 @@ import {
 import { RecoverPasswordComponent } from './components/login/recover-password/recover-password.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { CoursesListComponent } from './components/account/courses/courses-list.component';
+import {AuthenticationGuard} from "./guards/authentication.guard";
+import {MatMenuModule} from "@angular/material/menu";
+import {NgxWebstorageModule} from "ngx-webstorage";
 
 const routes: Routes = [
   { path: "recruitment-questions", component: RecruitmentQuestionsComponent},
   { path: "login", component: LoginFormComponent },
   { path: "register", component: RegisterFormComponent },
-  { path: "recover-password", component: RecoverPasswordComponent }
+  { path: "recover-password", component: RecoverPasswordComponent },
+  {
+    path: "account",
+    children: [
+      {
+        path: '',
+        redirectTo: 'courses',
+        pathMatch: 'full'
+      },
+      {
+        path: 'courses',
+        component: CoursesListComponent
+      }
+    ],
+    canActivate: [AuthenticationGuard]
+  }
 ];
 
 @NgModule({
@@ -41,24 +60,27 @@ const routes: Routes = [
     LoginFormComponent,
     RegisterFormComponent,
     RecoverPasswordComponent,
-    LoaderComponent
+    LoaderComponent,
+    CoursesListComponent
   ],
-    imports: [
-        BrowserModule,
-        RouterModule.forRoot(routes, {
-          useHash: true,
-          relativeLinkResolution: 'legacy',
-          paramsInheritanceStrategy: 'always'
-        }),
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatIconModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        ToastrModule.forRoot(),
-        MatProgressSpinnerModule
-    ],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes, {
+      useHash: true,
+      relativeLinkResolution: 'legacy',
+      paramsInheritanceStrategy: 'always'
+    }),
+    NgxWebstorageModule.forRoot(),
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    ToastrModule.forRoot(),
+    MatProgressSpinnerModule,
+    MatMenuModule
+  ],
   providers: [
   ],
   bootstrap: [AppComponent]

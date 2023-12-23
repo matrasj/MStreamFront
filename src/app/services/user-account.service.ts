@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {RegistrationRequestModel} from "../models/registration/registration-request.model";
 import {Observable} from "rxjs";
 import {RegistrationResponseModel} from "../models/registration/registration-response.model";
-import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'

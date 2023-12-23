@@ -7,7 +7,6 @@ import {ComponentStateEnum} from "../../../enums/component-state.enum";
 import {UserAccountService} from "../../../services/user-account.service";
 import {RegistrationRequestModel} from "../../../models/registration/registration-request.model";
 import {finalize} from "rxjs";
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-register-form',
@@ -20,8 +19,8 @@ export class RegisterFormComponent implements OnInit {
   public componentState = ComponentStateEnum.CREATE;
   public showInfoAboutCheckingMail: boolean = false;
   public registrationForm: FormGroup | null = null;
+
   constructor(private formBuilder: FormBuilder,
-              private httpClient: HttpClient,
               private toastr: ToastrService,
               private userAccountService: UserAccountService) { }
 

@@ -6,13 +6,25 @@
   </div>
 
   <div class="nav-links" [class.responsive]="showMenu">
-    <a [routerLink]="RouteManager.getCourses()">Kursy</a>
-    <a [routerLink]="RouteManager.getRecruitmentQuestions()">Pytania rekrutacyjne</a>
-    <a [routerLink]="RouteManager.getNewsletter()">Newsletter</a>
-    <a [routerLink]="RouteManager.getLogin()">Zaloguj się</a>
+    <button class="me-2" mat-raised-button color="primary" [routerLink]="RouteManager.getCourses()">Kursy</button>
+    <button class="me-2" mat-raised-button color="primary" [routerLink]="RouteManager.getRecruitmentQuestions()">Pytania rekrutacyjne</button>
+    <button class="me-2" mat-raised-button color="primary" [routerLink]="RouteManager.getNewsletter()">Newsletter</button>
+    <button
+      mat-raised-button color="accent"
+      *ngIf="!authenticationService.isLoggedIn(); else authenticatedView"
+      [routerLink]="RouteManager.getLogin()">Zaloguj się</button>
   </div>
   <button class="hamburger" (click)="toggleMenu()">
     <mat-icon *ngIf="!showMenu">menu</mat-icon>
     <mat-icon *ngIf="showMenu">close</mat-icon>
   </button>
 </header>
+
+<ng-template #authenticatedView>
+  <button class="me-2" mat-raised-button [matMenuTriggerFor]="menu" color="accent">Konto</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Profil</button>
+    <button mat-menu-item>Moje kursy</button>
+    <button mat-menu-item (click)="logout()">Wyloguj</button>
+  </mat-menu>
+</ng-template>

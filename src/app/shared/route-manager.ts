@@ -25,4 +25,12 @@ export class RouteManager {
   public static getRecoverPassword(): string[] {
     return RouteManager.getHome().concat(['recover-password']);
   }
+
+  public static getUserAccount(): string[] {
+    return RouteManager.getHome().concat(['account'])
+  }
+
+  public static getUserAccountCourses(): string[] {
+    return RouteManager.getUserAccount().concat(['courses']);
+  }
 }
