@@ -1,21 +1,32 @@
 <div class="container all-con">
   <ng-container *ngIf="componentState !== ComponentStateEnum.LOADING; else loader">
-    <h1>Quiz wielokrotnego wyboru, zaznacz wszystkie porpawne odpowiedzi</h1>
-    <div class="quiz-container">
-      <div class="question"  *ngFor="let question of quizQuestions">
-        <div class="question-content">{{ question.content }}</div>
-        <div class="answers">
-          <div class="answer mb-2" *ngFor="let answer of question.answers">
-            <mat-checkbox class="max-w-100"[formControl]="getControlForAnswer(question.id, answer.id)">
-              {{ answer.content }}
-            </mat-checkbox>
+    <app-solved-quiz
+      *ngIf="componentState === ComponentStateEnum.PREVIEW"
+      [solvedQuizResponse]="solvedQuizResponse"
+      [quizQuestions]="quizQuestions"
+    ></app-solved-quiz>
+    <ng-container>
+      <h1>Quiz wielokrotnego wyboru, zaznacz wszystkie poprawne odpowiedzi</h1>
+      <div class="quiz-container">
+        <div class="question"  *ngFor="let question of quizQuestions">
+          <div class="question-content">{{ question.content }}</div>
+          <div class="answers">
+            <div class="answer mb-2" *ngFor="let answer of question.answers">
+              <div [ngClass]="{
+                          'correct-answer' : isCorrectAnswer(question, answer),
+                          'incorrect-answer':  isIncorrectAnswer(question, answer)
+                      }">
+                <mat-checkbox class="max-w-100"[formControl]="getControlForAnswer(question.id, answer.id)">
+                  <span>{{ answer.content }}</span>
+                </mat-checkbox>
+              </div>
+            </div>
           </div>
         </div>
+
+        <button mat-raised-button color="accent" (click)="submit()">Wyślij i sprawdź wynik</button>
       </div>
-
-      <button mat-raised-button color="accent" (click)="submit()">Wyślij i sprawdź wynik</button>
-    </div>
-
+    </ng-container>
   </ng-container>
 </div>
 

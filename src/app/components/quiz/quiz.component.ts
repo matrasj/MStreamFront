@@ -7,7 +7,10 @@ import {QuizGenerationPayloadRequestModel} from "../../models/quiz/quiz-generati
 import {ToastrService} from "ngx-toastr";
 import {RouteManager} from "../../shared/route-manager";
 import {QuizQuestionModel} from "../../models/quiz/quiz-question.model";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
+import {QuizSolvedPayloadRequestModel} from "../../models/quiz/quiz-solved-payload-request.model";
+import {QuizSolvedPayloadResponseModel} from "../../models/quiz/quiz-solved-payload-response.model";
+import {QuizQuestionAnswerModel} from "../../models/quiz/quiz-question-answer.model";
 
 @Component({
   selector: 'app-quiz',
@@ -19,11 +22,11 @@ export class QuizComponent implements OnInit {
   public componentState: ComponentStateEnum = ComponentStateEnum.CREATE;
   public quizQuestions: QuizQuestionModel[] = [];
   public quizForm: FormGroup = new FormGroup({});
+  public solvedQuizResponse: QuizSolvedPayloadResponseModel | null = null;
   constructor(private activatedRoute: ActivatedRoute,
               private quizQuestionService: QuizQuestionService,
               private router: Router,
-              private torastService: ToastrService,
-              private formBuilder: FormBuilder) { }
+              private torastService: ToastrService) { }
 
   ngOnInit(): void {
     this.fetchForQuiz();
@@ -82,6 +85,54 @@ export class QuizComponent implements OnInit {
   }
 
   public submit() {
+    this.componentState = ComponentStateEnum.LOADING;
+    const solvedQuiz: QuizSolvedPayloadRequestModel = this.buildSolvedQuizObject();
+    this.quizQuestionService.solveQuiz(solvedQuiz)
+      .subscribe({
+        next: (res) => {
+          this.solvedQuizResponse = res;
+          this.componentState = ComponentStateEnum.PREVIEW;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        },
+        error: (err) => {
+          this.torastService.error('Wystąpił błąd podczas sprawdzania quizu');
+        }
+      })
+  }
 
+  public isCorrectAnswer(question: QuizQuestionModel, answer: QuizQuestionAnswerModel): boolean {
+    if (!this.solvedQuizResponse) return false;
+    return this.componentState === ComponentStateEnum.PREVIEW
+      && this.solvedQuizResponse.answersInfo[question.id].correctAnswerIds.includes(answer.id);
+  }
+
+  public isIncorrectAnswer(question: QuizQuestionModel, answer: QuizQuestionAnswerModel): boolean {
+    if (!this.solvedQuizResponse) return false;
+    return this.componentState === ComponentStateEnum.PREVIEW
+      && !this.solvedQuizResponse.answersInfo[question.id].correctAnswerIds.includes(answer.id)
+      && this.getControlForAnswer(question.id, answer.id).value === true;
+  }
+  private buildSolvedQuizObject(): QuizSolvedPayloadRequestModel {
+    const questionIdWithAnswerIds: Map<number, number[]> = new Map<number, number[]>();
+    this.quizQuestions.forEach((question) => {
+      const questionId: number = question.id;
+      const answerIds: number[] = [];
+      if (question.answers?.length > 0) {
+        question.answers.forEach((answer) => {
+          if (this.getControlForAnswer(questionId, answer.id)?.value === true) {
+            answerIds.push(answer.id);
+          }
+        });
+      }
+      questionIdWithAnswerIds.set(questionId, answerIds);
+    })
+
+    const mapAsObject: { [key: number]: number[] } = {}
+    questionIdWithAnswerIds.forEach((vale, key) => {
+      mapAsObject[key] = vale;
+    });
+    return {
+      solutions: mapAsObject
+    } as QuizSolvedPayloadRequestModel;
   }
 }

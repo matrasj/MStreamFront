@@ -27,6 +27,8 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatSelectModule} from "@angular/material/select";
 import {QuizComponent} from "./components/quiz/quiz.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { SolvedQuizComponent } from './components/quiz/solved-quiz/solved-quiz.component';
+import {NgCircleProgressModule} from "ng-circle-progress";
 
 const routes: Routes = [
   { path: "recruitment-questions", component: RecruitmentQuestionsComponent },
@@ -62,7 +64,8 @@ const routes: Routes = [
     RegisterFormComponent,
     RecoverPasswordComponent,
     LoaderComponent,
-    CoursesListComponent
+    CoursesListComponent,
+    SolvedQuizComponent
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,14 @@ const routes: Routes = [
       paramsInheritanceStrategy: 'always'
     }),
     HttpClientModule,
+    NgCircleProgressModule.forRoot({
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300
+    }),
     BrowserAnimationsModule,
     MatIconModule,
     MatInputModule,

@@ -1,0 +1,15 @@
+<div class="container p-5">
+  <circle-progress
+    *ngIf="solvedQuizResponse"
+    [percent]="(solvedQuizResponse.totalCorrectAnswersCount / solvedQuizResponse.totalQuestionsCount) * 100"
+    [radius]="100"
+    [outerStrokeWidth]="16"
+    [innerStrokeWidth]="8"
+    [outerStrokeColor]="'#78C000'"
+    [innerStrokeColor]="'#C7E596'"
+    [animation]="true"
+    [animationDuration]="300"
+  ></circle-progress>
+
+  <div></div>
+</div>

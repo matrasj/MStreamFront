@@ -32,6 +32,14 @@
   white-space: normal !important;
 }
 
+.correct-answer {
+  background-color: #b2f2bb;
+}
+
+.incorrect-answer {
+  background-color: #ffc9c9;
+}
+
 @media screen and (max-width: 600px) {
   .answer {
     min-width: calc(100% - 10px);
