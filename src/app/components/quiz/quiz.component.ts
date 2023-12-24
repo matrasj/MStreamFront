@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ComponentStateEnum} from 'src/app/enums/component-state.enum';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {of, switchMap} from "rxjs";
@@ -11,6 +11,9 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {QuizSolvedPayloadRequestModel} from "../../models/quiz/quiz-solved-payload-request.model";
 import {QuizSolvedPayloadResponseModel} from "../../models/quiz/quiz-solved-payload-response.model";
 import {QuizQuestionAnswerModel} from "../../models/quiz/quiz-question-answer.model";
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
 
 @Component({
   selector: 'app-quiz',
@@ -18,11 +21,13 @@ import {QuizQuestionAnswerModel} from "../../models/quiz/quiz-question-answer.mo
   styleUrls: ['./quiz.component.css']
 })
 export class QuizComponent implements OnInit {
+  @ViewChild('pdfContent', { static: false }) pdfContent: ElementRef | undefined;
   public readonly ComponentStateEnum = ComponentStateEnum;
   public componentState: ComponentStateEnum = ComponentStateEnum.CREATE;
   public quizQuestions: QuizQuestionModel[] = [];
   public quizForm: FormGroup = new FormGroup({});
   public solvedQuizResponse: QuizSolvedPayloadResponseModel | null = null;
+  public isExportingToPdf: boolean = false;
   constructor(private activatedRoute: ActivatedRoute,
               private quizQuestionService: QuizQuestionService,
               private router: Router,
@@ -44,8 +49,9 @@ export class QuizComponent implements OnInit {
     this.activatedRoute.queryParamMap
       .pipe(
         switchMap((queryParamMap: ParamMap) => {
-          const categories: number[] | undefined = queryParamMap.get('categories')?.split(',')?.map(Number);
+          const categories: number[] = queryParamMap.getAll('categories').map(category => parseInt(category, 10));
           const count: number | undefined = Number(queryParamMap.get('count'));
+
 
           if (!!categories && !!count) {
             return this.quizQuestionService.getQuiz({
@@ -112,6 +118,20 @@ export class QuizComponent implements OnInit {
       && !this.solvedQuizResponse.answersInfo[question.id].correctAnswerIds.includes(answer.id)
       && this.getControlForAnswer(question.id, answer.id).value === true;
   }
+
+  public exportToPdf(): void {
+    this.isExportingToPdf = true;
+    const pdf = new jsPDF();
+
+    const content = this.pdfContent?.nativeElement;
+    html2canvas(content).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      pdf.addImage(imgData, 'PNG', 10, 10, 190, 0);
+      pdf.save('quiz.pdf');
+      this.isExportingToPdf = false;
+    });
+  }
+
   private buildSolvedQuizObject(): QuizSolvedPayloadRequestModel {
     const questionIdWithAnswerIds: Map<number, number[]> = new Map<number, number[]>();
     this.quizQuestions.forEach((question) => {

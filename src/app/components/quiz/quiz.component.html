@@ -6,8 +6,17 @@
       [quizQuestions]="quizQuestions"
     ></app-solved-quiz>
     <ng-container>
-      <h1>Quiz wielokrotnego wyboru, zaznacz wszystkie poprawne odpowiedzi</h1>
-      <div class="quiz-container">
+      <div class="d-flex align-items-center mb-3">
+        <h1 class="me-4 mb-0">Quiz wielokrotnego wyboru, zaznacz wszystkie poprawne odpowiedzi</h1>
+        <button mat-raised-button color="accent"
+                (click)="exportToPdf()">
+          <div class="d-flex align-items-center">
+            <mat-icon class="me-2">picture_as_pdf</mat-icon>
+            <span>Eksportuj pytania do PDF</span>
+          </div>
+        </button>
+      </div>
+      <div class="quiz-container" #pdfContent>
         <div class="question"  *ngFor="let question of quizQuestions">
           <div class="question-content">{{ question.content }}</div>
           <div class="answers">
@@ -23,9 +32,8 @@
             </div>
           </div>
         </div>
-
-        <button mat-raised-button color="accent" (click)="submit()">Wyślij i sprawdź wynik</button>
       </div>
+      <button mat-raised-button color="accent" (click)="submit()">Wyślij i sprawdź wynik</button>
     </ng-container>
   </ng-container>
 </div>
