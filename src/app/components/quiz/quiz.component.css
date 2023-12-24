@@ -1,0 +1,44 @@
+.quiz-container {
+  width: 100%;
+}
+
+.all-con {
+  padding: 2rem;
+}
+
+.question {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #fffdf7;
+}
+
+
+.word-warp {
+  word-wrap: break-word;
+}
+
+.max-w-100 {
+  max-width: 100%;
+}
+
+.question-content {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+::ng-deep .mat-checkbox-layout {
+  white-space: normal !important;
+}
+
+@media screen and (max-width: 600px) {
+  .answer {
+    min-width: calc(100% - 10px);
+  }
+
+  .all-con {
+    width: 100%;
+    padding: 1rem;
+  }
+}

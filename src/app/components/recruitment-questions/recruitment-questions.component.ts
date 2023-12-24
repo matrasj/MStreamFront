@@ -1,0 +1,70 @@
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {QuizCategoryService} from "../../services/quiz/quiz-category.service";
+import {QuizCategoryModel} from "../../models/quiz/quiz-category.model";
+import {finalize} from "rxjs";
+import {ComponentStateEnum} from "../../enums/component-state.enum";
+import {ToastrService} from "ngx-toastr";
+import {RouteManager} from "../../shared/route-manager";
+import {Router} from "@angular/router";
+
+@Component({
+  selector: 'app-recruitment-questions',
+  templateUrl: './recruitment-questions.component.html',
+  styleUrls: ['./recruitment-questions.component.css']
+})
+export class RecruitmentQuestionsComponent implements OnInit {
+  public readonly ComponentStatEnum = ComponentStateEnum;
+  public readonly RouteManager = RouteManager;
+  public componentState: ComponentStateEnum = ComponentStateEnum.PREVIEW;
+  public quizFormGroup: FormGroup | undefined;
+  public quizCategories: QuizCategoryModel[] = [];
+  public questionNumbers: number[] = [1, 5, 10, 15, 20, 25];
+  constructor(private quizCategoryService: QuizCategoryService,
+              private toastrService: ToastrService,
+              private formBuilder: FormBuilder,
+              private router: Router) { }
+
+  ngOnInit(): void {
+    this.initForm();
+    this.fetchQuizCategories();
+  }
+
+  public get categoriesFormControl(): FormControl {
+    return <FormControl>this.quizFormGroup?.get('categories');
+  }
+  public get countFormControl(): FormControl {
+    return <FormControl>this.quizFormGroup?.get('count');
+  }
+  public solveQuiz(): void {
+    if (this.quizFormGroup?.invalid) {
+      this.toastrService.info('Formularz nie został wypeniony w całości');
+      this.quizFormGroup.markAllAsTouched();
+      return;
+    }
+
+    this.router.navigate(RouteManager.getSolveQuiz(), {
+      queryParams: {
+        categories: this.categoriesFormControl.value,
+        count: this.countFormControl.value
+      }
+    });
+  }
+
+  private fetchQuizCategories(): void {
+    this.componentState = ComponentStateEnum.LOADING;
+    this.quizCategoryService.getQuizCategories()
+      .pipe(finalize(() => this.componentState = ComponentStateEnum.PREVIEW))
+      .subscribe({
+        next: (res) => this.quizCategories = res,
+        error: (err) => this.toastrService.error('Wystąpił błąd podczas pobierania kategori quizów')
+      });
+  }
+
+  private initForm(): void {
+    this.quizFormGroup = this.formBuilder.group({
+      categories: new FormControl(null, [Validators.required]),
+      count: new FormControl(null, [Validators.required])
+    });
+  }
+}

@@ -15,21 +15,22 @@ import {ToastrModule} from "ngx-toastr";
 import {MainMenuComponent} from "./components/infrastructure/main-menu/main-menu.component";
 import {
   RecruitmentQuestionsComponent
-} from "./components/recruitment-question/recruitment-questions/recruitment-questions.component";
+} from "./components/recruitment-questions/recruitment-questions.component";
 import {RegisterFormComponent} from "./components/login/register-form/register-form.component";
-import {
-  RecruitmentQuestionsSidebarComponent
-} from "./components/recruitment-question/recruitment-questions-sidebar/recruitment-questions-sidebar.component";
 import { RecoverPasswordComponent } from './components/login/recover-password/recover-password.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { CoursesListComponent } from './components/account/courses/courses-list.component';
 import {AuthenticationGuard} from "./guards/authentication.guard";
 import {MatMenuModule} from "@angular/material/menu";
-import {NgxWebstorageModule} from "ngx-webstorage";
+import {MatTabsModule} from "@angular/material/tabs";
+import {MatSelectModule} from "@angular/material/select";
+import {QuizComponent} from "./components/quiz/quiz.component";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 const routes: Routes = [
-  { path: "recruitment-questions", component: RecruitmentQuestionsComponent},
+  { path: "recruitment-questions", component: RecruitmentQuestionsComponent },
+  { path: "quiz", component: QuizComponent },
   { path: "login", component: LoginFormComponent },
   { path: "register", component: RegisterFormComponent },
   { path: "recover-password", component: RecoverPasswordComponent },
@@ -55,8 +56,8 @@ const routes: Routes = [
     AppComponent,
     MainMenuComponent,
     MainFooterComponent,
-    RecruitmentQuestionsSidebarComponent,
     RecruitmentQuestionsComponent,
+    QuizComponent,
     LoginFormComponent,
     RegisterFormComponent,
     RecoverPasswordComponent,
@@ -70,7 +71,6 @@ const routes: Routes = [
       relativeLinkResolution: 'legacy',
       paramsInheritanceStrategy: 'always'
     }),
-    NgxWebstorageModule.forRoot(),
     HttpClientModule,
     BrowserAnimationsModule,
     MatIconModule,
@@ -79,7 +79,10 @@ const routes: Routes = [
     MatButtonModule,
     ToastrModule.forRoot(),
     MatProgressSpinnerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatCheckboxModule
   ],
   providers: [
   ],

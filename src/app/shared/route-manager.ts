@@ -33,4 +33,8 @@ export class RouteManager {
   public static getUserAccountCourses(): string[] {
     return RouteManager.getUserAccount().concat(['courses']);
   }
+
+  public static getSolveQuiz(): string[] {
+    return RouteManager.getHome().concat(['quiz']);
+  }
 }
