@@ -35,6 +35,14 @@ export class RouteManager {
   }
 
   public static getSolveQuiz(): string[] {
-    return RouteManager.getHome().concat(['quiz']);
+    return RouteManager.getRecruitmentQuestions().concat(['solving']);
+  }
+
+  public static getQuizGenerationForm(): string[] {
+    return RouteManager.getRecruitmentQuestions().concat(['quiz-form']);
+  }
+
+  public static getQuestionsList(): string[] {
+    return RouteManager.getRecruitmentQuestions().concat(['questions-list']);
   }
 }

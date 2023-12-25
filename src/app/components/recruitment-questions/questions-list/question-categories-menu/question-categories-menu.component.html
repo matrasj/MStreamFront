@@ -1,0 +1,13 @@
+<div *ngIf="componentState !== ComponentStateEnum.LOADING; else loader">
+  <div class="d-flex flex-column">
+    <div *ngFor="let quizCategory of quizCategories"
+         class="mb-2 custom-tab"
+         [ngClass]="{ 'active': selectedCategory?.id === quizCategory.id}"
+         (click)="selectedCategory = quizCategory"
+    >{{ quizCategory.name }}</div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
