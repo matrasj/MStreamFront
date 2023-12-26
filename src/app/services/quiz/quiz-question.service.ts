@@ -8,7 +8,8 @@ import {QuizSolvedPayloadResponseModel} from "../../models/quiz/quiz-solved-payl
 import {
   QuizQuestionWithInfoAboutCorrectAnswersModel
 } from "../../models/quiz/quiz-question-with-info-about-correct-answers.model";
-import {urlJoin} from "@angular-devkit/build-angular/src/utils";
+import {PaginationPayloadRequestModel} from "../../models/shared/pagination-payload-request.model";
+import {ListModel} from "../../models/shared/list.model";
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,10 @@ export class QuizQuestionService {
   }
 
   public solveQuiz(solvedQuiz: QuizSolvedPayloadRequestModel): Observable<QuizSolvedPayloadResponseModel> {
-    return this.httpClient.post<QuizSolvedPayloadResponseModel>(urlJoin(this.resourceUrl, 'solution'), solvedQuiz);
+    return this.httpClient.post<QuizSolvedPayloadResponseModel>(`${this.resourceUrl}/solution`, solvedQuiz);
   }
 
-  public getQuizQuestionsByCategoryId(quizCategoryId: number): Observable<QuizQuestionWithInfoAboutCorrectAnswersModel[]> {
-    return this.httpClient.get<QuizQuestionWithInfoAboutCorrectAnswersModel[]>(urlJoin(this.resourceUrl, 'quiz-category', `${quizCategoryId}`));
+  public getQuizQuestionsByCategoryId(quizCategoryId: number, paginationRequest: PaginationPayloadRequestModel): Observable<ListModel<QuizQuestionWithInfoAboutCorrectAnswersModel>> {
+    return this.httpClient.post<ListModel<QuizQuestionWithInfoAboutCorrectAnswersModel>>( `${this.resourceUrl}/quiz-category/${quizCategoryId}`, paginationRequest);
   }
 }

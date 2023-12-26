@@ -4,6 +4,8 @@ import {ComponentStateEnum} from "../../../../enums/component-state.enum";
 import {QuizCategoryModel} from "../../../../models/quiz/quiz-category.model";
 import {finalize} from "rxjs";
 import {ToastrService} from "ngx-toastr";
+import {RouteManager} from "../../../../shared/route-manager";
+import {Router, RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-question-categories-menu',
@@ -12,11 +14,13 @@ import {ToastrService} from "ngx-toastr";
 })
 export class QuestionCategoriesMenuComponent implements OnInit {
   public readonly ComponentStateEnum = ComponentStateEnum;
+  public readonly RouteManager = RouteManager;
   public componentState: ComponentStateEnum = ComponentStateEnum.PREVIEW;
   public quizCategories: QuizCategoryModel[] = [];
   public selectedCategory: QuizCategoryModel | null = null;
   constructor(private quizCategoryService: QuizCategoryService,
-              private toastrService: ToastrService) { }
+              private toastrService: ToastrService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.fetchCategories();
@@ -35,6 +39,7 @@ export class QuestionCategoriesMenuComponent implements OnInit {
           this.quizCategories = res;
           if (this.quizCategories?.length > 0) {
             this.selectedCategory = this.quizCategories[0];
+            this.router.navigate(RouteManager.getQuestionsListForQuizCategory(this.selectedCategory.id));
           }
         },
         error: (err) => this.toastrService.error('Wystąpił błąd podczas pobierania kategorii')

@@ -1,0 +1,17 @@
+.answer-node {
+  padding-left: 3rem;
+  font-size: 1rem;
+}
+
+.icon-size {
+  font-size: 35px;
+}
+
+.content-font {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.correct {
+  background-color: #C7E596;
+}

@@ -45,4 +45,8 @@ export class RouteManager {
   public static getQuestionsList(): string[] {
     return RouteManager.getRecruitmentQuestions().concat(['questions-list']);
   }
+
+  public static getQuestionsListForQuizCategory(quizCategoryId: number): string[] {
+    return RouteManager.getQuestionsList().concat([`${quizCategoryId}`]);
+  }
 }

@@ -33,9 +33,9 @@ import { QuizGenerationFormComponent } from './components/recruitment-questions/
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { QuestionCategoriesMenuComponent } from './components/recruitment-questions/questions-list/question-categories-menu/question-categories-menu.component';
 import { QuestionCategoriesListComponent } from './components/recruitment-questions/questions-list/question-categories-list/question-categories-list.component';
-import {MatListModule} from "@angular/material/list";
-import {MatChipsModule} from "@angular/material/chips";
 import {MatTreeModule} from "@angular/material/tree";
+import {MatRippleModule} from "@angular/material/core";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 const routes: Routes = [
   { path: "recruitment-questions", component: RecruitmentQuestionsComponent, children: [
@@ -55,7 +55,11 @@ const routes: Routes = [
       {
         path: 'questions-list',
         component: QuestionCategoriesListComponent
-      }
+      },
+      {
+        path: 'questions-list/:quizCategoryId',
+        component: QuestionCategoriesListComponent
+      },
   ]},
   { path: "login", component: LoginFormComponent },
   { path: "register", component: RegisterFormComponent },
@@ -121,7 +125,10 @@ const routes: Routes = [
     MatTabsModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatTreeModule,
+    MatRippleModule,
+    MatPaginatorModule
   ],
   providers: [
   ],
