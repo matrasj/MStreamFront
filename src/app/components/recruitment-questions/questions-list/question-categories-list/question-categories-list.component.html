@@ -1,0 +1,47 @@
+<div class="d-flex align-items-start">
+  <div class="me-5">
+    <app-question-categories-menu></app-question-categories-menu>
+  </div>
+  <div *ngIf="componentState !== ComponentStateEnum.LOADING; else loader" class="d-flex flex-column align-items-start">
+    <div class="question-node mb-1" *ngFor="let question of quizQuestions">
+      <div class="d-flex align-items-center" (click)="expand(question.id)">
+        <button mat-icon-button matRipple *ngIf="!expandMap.get(question.id)">
+          <mat-icon class="icon-size">expand_less</mat-icon>
+        </button>
+        <button mat-icon-button mat-ripple *ngIf="expandMap.get(question.id)">
+          <mat-icon class="icon-size">expand_more</mat-icon>
+        </button>
+
+        <span class="content-font">{{ question.content }}</span>
+      </div>
+      <ng-container *ngIf="expandMap.get(question.id)">
+        <div *ngFor="let answer of question.answers" class="mt-2">
+          <div class="answer-node mb-3 d-flex align-items-center">
+            <div class="d-flex align-items-center p-1" [ngClass]="{ 'correct': answer.correct }">
+              <mat-checkbox class="me-3" [checked]="answer.correct" [disabled]="true">
+              </mat-checkbox>
+              <span>
+                {{ answer.content }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="mt-3">
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+                     [pageSize]="paginationModel.itemsPerPage"
+                     [length]="totalCount"
+                     [pageIndex]="paginationModel.page"
+                     (page)="onPageChange($event)"
+                     showFirstLastButtons
+                     aria-label="Select page">
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

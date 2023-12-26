@@ -13,58 +13,11 @@ import {Router} from "@angular/router";
   templateUrl: './recruitment-questions.component.html',
   styleUrls: ['./recruitment-questions.component.css']
 })
-export class RecruitmentQuestionsComponent implements OnInit {
-  public readonly ComponentStatEnum = ComponentStateEnum;
+export class RecruitmentQuestionsComponent {
+  constructor(private router: Router) {
+  }
   public readonly RouteManager = RouteManager;
-  public componentState: ComponentStateEnum = ComponentStateEnum.PREVIEW;
-  public quizFormGroup: FormGroup | undefined;
-  public quizCategories: QuizCategoryModel[] = [];
-  public questionNumbers: number[] = [1, 5, 10, 15, 20, 25];
-  constructor(private quizCategoryService: QuizCategoryService,
-              private toastrService: ToastrService,
-              private formBuilder: FormBuilder,
-              private router: Router) { }
-
-  ngOnInit(): void {
-    this.initForm();
-    this.fetchQuizCategories();
-  }
-
-  public get categoriesFormControl(): FormControl {
-    return <FormControl>this.quizFormGroup?.get('categories');
-  }
-  public get countFormControl(): FormControl {
-    return <FormControl>this.quizFormGroup?.get('count');
-  }
-  public solveQuiz(): void {
-    if (this.quizFormGroup?.invalid) {
-      this.toastrService.info('Formularz nie został wypeniony w całości');
-      this.quizFormGroup.markAllAsTouched();
-      return;
-    }
-
-    this.router.navigate(RouteManager.getSolveQuiz(), {
-      queryParams: {
-        categories: this.categoriesFormControl.value,
-        count: this.countFormControl.value
-      }
-    });
-  }
-
-  private fetchQuizCategories(): void {
-    this.componentState = ComponentStateEnum.LOADING;
-    this.quizCategoryService.getQuizCategories()
-      .pipe(finalize(() => this.componentState = ComponentStateEnum.PREVIEW))
-      .subscribe({
-        next: (res) => this.quizCategories = res,
-        error: (err) => this.toastrService.error('Wystąpił błąd podczas pobierania kategori quizów')
-      });
-  }
-
-  private initForm(): void {
-    this.quizFormGroup = this.formBuilder.group({
-      categories: new FormControl(null, [Validators.required]),
-      count: new FormControl(null, [Validators.required])
-    });
+  public isRouteActive(route: string): boolean {
+    return this.router.url.includes(route);
   }
 }

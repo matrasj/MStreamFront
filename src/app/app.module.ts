@@ -25,14 +25,42 @@ import {AuthenticationGuard} from "./guards/authentication.guard";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatSelectModule} from "@angular/material/select";
-import {QuizComponent} from "./components/quiz/quiz.component";
+import {QuizFormComponent} from "./components/recruitment-questions/quiz/quiz-form/quiz-form.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
-import { SolvedQuizComponent } from './components/quiz/solved-quiz/solved-quiz.component';
+import { SolvedQuizComponent } from './components/recruitment-questions/quiz/solved-quiz/solved-quiz.component';
 import {NgCircleProgressModule} from "ng-circle-progress";
+import { QuizGenerationFormComponent } from './components/recruitment-questions/quiz/quiz-generation-form/quiz-generation-form.component';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { QuestionCategoriesMenuComponent } from './components/recruitment-questions/questions-list/question-categories-menu/question-categories-menu.component';
+import { QuestionCategoriesListComponent } from './components/recruitment-questions/questions-list/question-categories-list/question-categories-list.component';
+import {MatTreeModule} from "@angular/material/tree";
+import {MatRippleModule} from "@angular/material/core";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 const routes: Routes = [
-  { path: "recruitment-questions", component: RecruitmentQuestionsComponent },
-  { path: "quiz", component: QuizComponent },
+  { path: "recruitment-questions", component: RecruitmentQuestionsComponent, children: [
+      {
+        path: '',
+        redirectTo: 'quiz-form',
+        pathMatch: 'full',
+      },
+      {
+        path: 'quiz-form',
+        component: QuizGenerationFormComponent
+      },
+      {
+        path: 'solving',
+        component: QuizFormComponent
+      },
+      {
+        path: 'questions-list',
+        component: QuestionCategoriesListComponent
+      },
+      {
+        path: 'questions-list/:quizCategoryId',
+        component: QuestionCategoriesListComponent
+      },
+  ]},
   { path: "login", component: LoginFormComponent },
   { path: "register", component: RegisterFormComponent },
   { path: "recover-password", component: RecoverPasswordComponent },
@@ -59,13 +87,16 @@ const routes: Routes = [
     MainMenuComponent,
     MainFooterComponent,
     RecruitmentQuestionsComponent,
-    QuizComponent,
+    QuizFormComponent,
     LoginFormComponent,
     RegisterFormComponent,
     RecoverPasswordComponent,
     LoaderComponent,
     CoursesListComponent,
-    SolvedQuizComponent
+    SolvedQuizComponent,
+    QuizGenerationFormComponent,
+    QuestionCategoriesMenuComponent,
+    QuestionCategoriesListComponent
   ],
   imports: [
     BrowserModule,
@@ -93,7 +124,11 @@ const routes: Routes = [
     MatMenuModule,
     MatTabsModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatButtonToggleModule,
+    MatTreeModule,
+    MatRippleModule,
+    MatPaginatorModule
   ],
   providers: [
   ],

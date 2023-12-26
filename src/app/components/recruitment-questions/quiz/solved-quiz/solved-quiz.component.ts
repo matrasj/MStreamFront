@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {QuizSolvedPayloadResponseModel} from "../../../models/quiz/quiz-solved-payload-response.model";
-import {QuizQuestionModel} from "../../../models/quiz/quiz-question.model";
+import {QuizSolvedPayloadResponseModel} from "../../../../models/quiz/quiz-solved-payload-response.model";
+import {QuizQuestionModel} from "../../../../models/quiz/quiz-question.model";
 
 @Component({
   selector: 'app-solved-quiz',

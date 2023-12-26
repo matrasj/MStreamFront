@@ -2,25 +2,25 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ComponentStateEnum} from 'src/app/enums/component-state.enum';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {of, switchMap} from "rxjs";
-import {QuizQuestionService} from "../../services/quiz/quiz-question.service";
-import {QuizGenerationPayloadRequestModel} from "../../models/quiz/quiz-generation-payload-request.model";
+import {QuizQuestionService} from "../../../../services/quiz/quiz-question.service";
+import {QuizGenerationPayloadRequestModel} from "../../../../models/quiz/quiz-generation-payload-request.model";
 import {ToastrService} from "ngx-toastr";
-import {RouteManager} from "../../shared/route-manager";
-import {QuizQuestionModel} from "../../models/quiz/quiz-question.model";
+import {RouteManager} from "../../../../shared/route-manager";
+import {QuizQuestionModel} from "../../../../models/quiz/quiz-question.model";
 import {FormControl, FormGroup} from "@angular/forms";
-import {QuizSolvedPayloadRequestModel} from "../../models/quiz/quiz-solved-payload-request.model";
-import {QuizSolvedPayloadResponseModel} from "../../models/quiz/quiz-solved-payload-response.model";
-import {QuizQuestionAnswerModel} from "../../models/quiz/quiz-question-answer.model";
+import {QuizSolvedPayloadRequestModel} from "../../../../models/quiz/quiz-solved-payload-request.model";
+import {QuizSolvedPayloadResponseModel} from "../../../../models/quiz/quiz-solved-payload-response.model";
+import {QuizQuestionAnswerModel} from "../../../../models/quiz/quiz-question-answer.model";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
 
 @Component({
-  selector: 'app-quiz',
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.css']
+  selector: 'app-quiz-form',
+  templateUrl: './quiz-form.component.html',
+  styleUrls: ['./quiz-form.component.css']
 })
-export class QuizComponent implements OnInit {
+export class QuizFormComponent implements OnInit {
   @ViewChild('pdfContent', { static: false }) pdfContent: ElementRef | undefined;
   public readonly ComponentStateEnum = ComponentStateEnum;
   public componentState: ComponentStateEnum = ComponentStateEnum.CREATE;
