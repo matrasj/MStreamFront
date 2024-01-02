@@ -42,6 +42,7 @@ import {VgCoreModule} from "@videogular/ngx-videogular/core";
 import {VgControlsModule} from "@videogular/ngx-videogular/controls";
 import {VgOverlayPlayModule} from "@videogular/ngx-videogular/overlay-play";
 import {VgBufferingModule} from "@videogular/ngx-videogular/buffering";
+import {VgStreamingModule} from "@videogular/ngx-videogular/streaming";
 
 const routes: Routes = [
   { path: "recruitment-questions", component: RecruitmentQuestionsComponent, children: [
@@ -115,42 +116,43 @@ const routes: Routes = [
     CoursesMainViewComponent,
     PromoViedoModalComponent
   ],
-    imports: [
-        BrowserModule,
-        RouterModule.forRoot(routes, {
-            useHash: true,
-            relativeLinkResolution: 'legacy',
-            paramsInheritanceStrategy: 'always'
-        }),
-        HttpClientModule,
-        NgCircleProgressModule.forRoot({
-            radius: 100,
-            outerStrokeWidth: 16,
-            innerStrokeWidth: 8,
-            outerStrokeColor: "#78C000",
-            innerStrokeColor: "#C7E596",
-            animationDuration: 300
-        }),
-        BrowserAnimationsModule,
-        MatIconModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        ToastrModule.forRoot(),
-        MatProgressSpinnerModule,
-        MatMenuModule,
-        MatTabsModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        MatButtonToggleModule,
-        MatTreeModule,
-        MatRippleModule,
-        MatPaginatorModule,
-        VgCoreModule,
-        VgControlsModule,
-        VgOverlayPlayModule,
-        VgBufferingModule
-    ],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes, {
+      useHash: true,
+      relativeLinkResolution: 'legacy',
+      paramsInheritanceStrategy: 'always'
+    }),
+    HttpClientModule,
+    NgCircleProgressModule.forRoot({
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300
+    }),
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    ToastrModule.forRoot(),
+    MatProgressSpinnerModule,
+    MatMenuModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatButtonToggleModule,
+    MatTreeModule,
+    MatRippleModule,
+    MatPaginatorModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
+    VgStreamingModule
+  ],
   providers: [
   ],
   bootstrap: [AppComponent]

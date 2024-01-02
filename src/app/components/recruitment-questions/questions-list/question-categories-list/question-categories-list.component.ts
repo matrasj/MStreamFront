@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {QuizQuestionService} from "../../../../services/quiz/quiz-question.service";
-import {QuizQuestionModel} from "../../../../models/quiz/quiz-question.model";
 import {ComponentStateEnum} from "../../../../enums/component-state.enum";
-import {switchMap} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {
@@ -10,7 +8,6 @@ import {
 } from "../../../../models/quiz/quiz-question-with-info-about-correct-answers.model";
 import {PaginationPayloadRequestModel} from "../../../../models/shared/pagination-payload-request.model";
 import {PageEvent} from "@angular/material/paginator";
-import {$e} from "@angular/compiler/src/chars";
 
 @Component({
   selector: 'app-question-categories-list',

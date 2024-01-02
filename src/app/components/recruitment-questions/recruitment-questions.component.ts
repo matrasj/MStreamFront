@@ -1,10 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {QuizCategoryService} from "../../services/quiz/quiz-category.service";
-import {QuizCategoryModel} from "../../models/quiz/quiz-category.model";
-import {finalize} from "rxjs";
-import {ComponentStateEnum} from "../../enums/component-state.enum";
-import {ToastrService} from "ngx-toastr";
 import {RouteManager} from "../../shared/route-manager";
 import {Router} from "@angular/router";
 
