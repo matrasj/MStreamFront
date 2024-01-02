@@ -1,0 +1,34 @@
+.header-container {
+  position: relative;
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('src/assets/images/header_logo.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  background-color: #f3f3f3;
+  border-radius: 2rem;
+}
+
+h1 {
+  font-size: 2.4rem;
+}
+
+p {
+  line-height: 1.8;
+}
+
+.header-info {
+  font-size: 1.2rem;
+}
