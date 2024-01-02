@@ -1,5 +1,7 @@
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,300&family=Montserrat:wght@300&family=Open+Sans:ital,wght@0,400;1,300&family=Playfair+Display&family=Rubik:ital,wght@0,400;1,300&display=swap');
+
+
+body { margin: 0 }
 
 .max-w-input {
   width: 100%;
@@ -24,4 +26,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 p {
   color: #333;
+}
+
+html, body, h1, h2, h3, h4, h5, p, span, button {
+  height: 100%;
+  font-family: 'Merriweather', serif !important;
 }
