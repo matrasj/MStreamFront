@@ -119,10 +119,9 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes, {
-      useHash: true,
-      relativeLinkResolution: 'legacy',
-      paramsInheritanceStrategy: 'always'
-    }),
+    useHash: true,
+    paramsInheritanceStrategy: 'always'
+}),
     HttpClientModule,
     NgCircleProgressModule.forRoot({
       radius: 100,
