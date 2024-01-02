@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {RouteManager} from "../../../shared/route-manager";
 import {emailValidator} from "../../../shared/validators/email.validator";
@@ -18,9 +18,9 @@ export class LoginFormComponent implements OnInit {
   public readonly RouteManager = RouteManager;
   public readonly ComponentStateEnum = ComponentStateEnum;
   public componentState: ComponentStateEnum = ComponentStateEnum.CREATE;
-  public loginForm: FormGroup | null = null;
+  public loginForm: UntypedFormGroup | null = null;
   constructor(public authenticationService: AuthenticationService,
-              private formBuilder: FormBuilder,
+              private formBuilder: UntypedFormBuilder,
               private toastr: ToastrService,
               private router: Router) {
   }
@@ -29,12 +29,12 @@ export class LoginFormComponent implements OnInit {
     this.initForm();
   }
 
-  public get emailFormControl(): FormControl {
-    return <FormControl>this.loginForm?.get('email');
+  public get emailFormControl(): UntypedFormControl {
+    return <UntypedFormControl>this.loginForm?.get('email');
   }
 
-  public get passwordFormControl(): FormControl {
-    return <FormControl>this.loginForm?.get('password');
+  public get passwordFormControl(): UntypedFormControl {
+    return <UntypedFormControl>this.loginForm?.get('password');
   }
 
   public login(): void {

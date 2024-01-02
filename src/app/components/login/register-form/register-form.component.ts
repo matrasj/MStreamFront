@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {RouteManager} from 'src/app/shared/route-manager';
 import {emailValidator} from "../../../shared/validators/email.validator";
@@ -18,9 +18,9 @@ export class RegisterFormComponent implements OnInit {
   public readonly ComponentStateEnum = ComponentStateEnum;
   public componentState = ComponentStateEnum.CREATE;
   public showInfoAboutCheckingMail: boolean = false;
-  public registrationForm: FormGroup | null = null;
+  public registrationForm: UntypedFormGroup | null = null;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private formBuilder: UntypedFormBuilder,
               private toastr: ToastrService,
               private userAccountService: UserAccountService) { }
 
@@ -28,24 +28,24 @@ export class RegisterFormComponent implements OnInit {
     this.initForm();
   }
 
-  public get firstNameFormControl(): FormControl {
-    return <FormControl>this.registrationForm?.get('firstName');
+  public get firstNameFormControl(): UntypedFormControl {
+    return <UntypedFormControl>this.registrationForm?.get('firstName');
   }
 
-  public get lastNameFormControl(): FormControl {
-    return <FormControl>this.registrationForm?.get('lastName');
+  public get lastNameFormControl(): UntypedFormControl {
+    return <UntypedFormControl>this.registrationForm?.get('lastName');
   }
 
-  public get emailFormControl(): FormControl {
-    return <FormControl>this.registrationForm?.get('email');
+  public get emailFormControl(): UntypedFormControl {
+    return <UntypedFormControl>this.registrationForm?.get('email');
   }
 
-  public get passwordFormControl(): FormControl {
-    return <FormControl>this.registrationForm?.get('password');
+  public get passwordFormControl(): UntypedFormControl {
+    return <UntypedFormControl>this.registrationForm?.get('password');
   }
 
-  public get phoneNumberFormControl(): FormControl {
-    return <FormControl>this.registrationForm?.get('phoneNumber');
+  public get phoneNumberFormControl(): UntypedFormControl {
+    return <UntypedFormControl>this.registrationForm?.get('phoneNumber');
   }
   private initForm(): void {
     this.registrationForm = this.formBuilder.group({

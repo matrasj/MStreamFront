@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ComponentStateEnum} from "../../../../enums/component-state.enum";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {QuizCategoryModel} from "../../../../models/quiz/quiz-category.model";
 import {RouteManager} from "../../../../shared/route-manager";
 import {finalize} from "rxjs";
@@ -16,13 +16,13 @@ import {Router} from "@angular/router";
 export class QuizGenerationFormComponent implements OnInit {
   public readonly ComponentStatEnum = ComponentStateEnum;
   public componentState: ComponentStateEnum = ComponentStateEnum.PREVIEW;
-  public quizFormGroup: FormGroup | undefined;
+  public quizFormGroup: UntypedFormGroup | undefined;
   public quizCategories: QuizCategoryModel[] = [];
   public questionNumbers: number[] = [1, 5, 10, 15, 20, 25];
   constructor(
     private quizCategoryService: QuizCategoryService,
     private toastrService: ToastrService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private router: Router
   ) { }
 
@@ -31,11 +31,11 @@ export class QuizGenerationFormComponent implements OnInit {
     this.fetchQuizCategories();
   }
 
-  public get categoriesFormControl(): FormControl {
-    return <FormControl>this.quizFormGroup?.get('categories');
+  public get categoriesFormControl(): UntypedFormControl {
+    return <UntypedFormControl>this.quizFormGroup?.get('categories');
   }
-  public get countFormControl(): FormControl {
-    return <FormControl>this.quizFormGroup?.get('count');
+  public get countFormControl(): UntypedFormControl {
+    return <UntypedFormControl>this.quizFormGroup?.get('count');
   }
   public solveQuiz(): void {
     if (this.quizFormGroup?.invalid) {
@@ -64,8 +64,8 @@ export class QuizGenerationFormComponent implements OnInit {
 
   private initForm(): void {
     this.quizFormGroup = this.formBuilder.group({
-      categories: new FormControl(null, [Validators.required]),
-      count: new FormControl(null, [Validators.required])
+      categories: new UntypedFormControl(null, [Validators.required]),
+      count: new UntypedFormControl(null, [Validators.required])
     });
   }
 }

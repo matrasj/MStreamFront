@@ -7,7 +7,7 @@ import {QuizGenerationPayloadRequestModel} from "../../../../models/quiz/quiz-ge
 import {ToastrService} from "ngx-toastr";
 import {RouteManager} from "../../../../shared/route-manager";
 import {QuizQuestionModel} from "../../../../models/quiz/quiz-question.model";
-import {FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {QuizSolvedPayloadRequestModel} from "../../../../models/quiz/quiz-solved-payload-request.model";
 import {QuizSolvedPayloadResponseModel} from "../../../../models/quiz/quiz-solved-payload-response.model";
 import {QuizQuestionAnswerModel} from "../../../../models/quiz/quiz-question-answer.model";
@@ -25,7 +25,7 @@ export class QuizFormComponent implements OnInit {
   public readonly ComponentStateEnum = ComponentStateEnum;
   public componentState: ComponentStateEnum = ComponentStateEnum.CREATE;
   public quizQuestions: QuizQuestionModel[] = [];
-  public quizForm: FormGroup = new FormGroup({});
+  public quizForm: UntypedFormGroup = new UntypedFormGroup({});
   public solvedQuizResponse: QuizSolvedPayloadResponseModel | null = null;
   public isExportingToPdf: boolean = false;
   constructor(private activatedRoute: ActivatedRoute,
@@ -40,8 +40,8 @@ export class QuizFormComponent implements OnInit {
   public getNameForAnswerControl(questionId: number, answerId: number) {
     return `${questionId}_${answerId}`;
   }
-  public getControlForAnswer(questionId: number, answerId: number): FormControl {
-    return <FormControl>this.quizForm.get(this.getNameForAnswerControl(questionId, answerId));
+  public getControlForAnswer(questionId: number, answerId: number): UntypedFormControl {
+    return <UntypedFormControl>this.quizForm.get(this.getNameForAnswerControl(questionId, answerId));
   }
 
   private fetchForQuiz(): void {
@@ -83,7 +83,7 @@ export class QuizFormComponent implements OnInit {
     this.quizQuestions.forEach((question) => {
       if (question.answers?.length > 0) {
         question.answers.forEach((answer) => {
-          const answerFormControl: FormControl = new FormControl(null);
+          const answerFormControl: UntypedFormControl = new UntypedFormControl(null);
           this.quizForm.addControl(this.getNameForAnswerControl(question.id, answer.id), answerFormControl);
         });
       }
