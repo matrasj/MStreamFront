@@ -78,6 +78,15 @@ const routes: Routes = [
       }
     ],
     canActivate: [AuthenticationGuard]
+  },
+  {
+    path: '',
+    redirectTo: 'courses',
+    pathMatch: 'full'
+  },
+  {
+    path: 'courses',
+    component
   }
 ];
 

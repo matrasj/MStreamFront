@@ -2,8 +2,8 @@
   <div class="mb-5">
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
 
-      <mat-button-toggle [routerLink]="RouteManager.getQuizGenerationForm()" [checked]="isRouteActive('quiz-form')">Quizy</mat-button-toggle>
-      <mat-button-toggle [routerLink]="RouteManager.getQuestionsList()" [checked]="isRouteActive('questions-list')">Lista pytań</mat-button-toggle>
+      <mat-button-toggle [routerLink]="RouteManager.getQuizGenerationForm()" [checked]="isRouteActive(['quiz-form', 'solving'])">Quizy</mat-button-toggle>
+      <mat-button-toggle [routerLink]="RouteManager.getQuestionsList()" [checked]="isRouteActive(['questions-list'])">Lista pytań</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 
