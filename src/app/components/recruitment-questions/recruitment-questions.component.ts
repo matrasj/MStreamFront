@@ -12,6 +12,6 @@ export class RecruitmentQuestionsComponent {
   }
   public readonly RouteManager = RouteManager;
   public isRouteActive(routes: string[]): boolean {
-    return routes.find((route) => route.includes(route)) !== undefined
+    return routes.find((route) => this.router.url.includes(route)) !== undefined
   }
 }

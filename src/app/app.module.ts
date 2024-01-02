@@ -37,7 +37,7 @@ import {MatTreeModule} from "@angular/material/tree";
 import {MatRippleModule} from "@angular/material/core";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { CoursesMainViewComponent } from './components/course/courses-main-view/courses-main-view.component';
-import { PromoViedoModalComponent } from './components/course/promo-viedo-modal/promo-viedo-modal.component';
+import { PromoVideoModalComponent } from './components/course/promo-viedo-modal/promo-video-modal.component';
 import {VgCoreModule} from "@videogular/ngx-videogular/core";
 import {VgControlsModule} from "@videogular/ngx-videogular/controls";
 import {VgOverlayPlayModule} from "@videogular/ngx-videogular/overlay-play";
@@ -114,14 +114,14 @@ const routes: Routes = [
     QuestionCategoriesMenuComponent,
     QuestionCategoriesListComponent,
     CoursesMainViewComponent,
-    PromoViedoModalComponent
+    PromoVideoModalComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes, {
     useHash: true,
     paramsInheritanceStrategy: 'always'
-}),
+    }),
     HttpClientModule,
     NgCircleProgressModule.forRoot({
       radius: 100,

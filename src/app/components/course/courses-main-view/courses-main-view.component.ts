@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {PromoViedoModalComponent} from "../promo-viedo-modal/promo-viedo-modal.component";
+import {PromoVideoModalComponent} from "../promo-viedo-modal/promo-video-modal.component";
 
 @Component({
   selector: 'app-courses-main-view',
@@ -15,7 +15,7 @@ export class CoursesMainViewComponent implements OnInit {
   }
 
   public openPromoWithVideoModal(): void {
-    const confirmRef = this.ngbModal.open(PromoViedoModalComponent, { size: 'lg' });
+    const confirmRef = this.ngbModal.open(PromoVideoModalComponent, { size: 'lg' });
 
   }
 }
