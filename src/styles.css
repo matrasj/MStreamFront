@@ -47,6 +47,28 @@ body { margin: 0 }
   color: #555;
 }
 
+.mj-tab {
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 25px;
+  min-width: 120px;
+  text-align: center;
+  background-color: #ffffff;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.mj-tab:hover {
+  background-color: #f0f0f0;
+}
+
+.mj-tab.active {
+  background-color: #1a9086;
+  color: #ffffff;
+  border: 1px solid #1a9086;
+}
+
 @media only screen and (max-width: 500px) {
   .form-con {
     padding: 1rem;

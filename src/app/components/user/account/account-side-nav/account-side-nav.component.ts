@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {RouteManager} from "../../../../shared/route-manager";
 
 @Component({
   selector: 'app-account-side-nav',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./account-side-nav.component.css']
 })
 export class AccountSideNavComponent {
-
+  public readonly RouteManager = RouteManager;
 }

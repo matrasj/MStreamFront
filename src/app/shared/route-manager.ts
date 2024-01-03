@@ -50,7 +50,11 @@ export class RouteManager {
     return RouteManager.getUserAccount().concat(['profile']);
   }
 
+  public static getTransactionsHistory(): string[] {
+    return RouteManager.getUserAccount().concat(['transactions-history']);
+  }
   // Courses
+
   public static getUserCourses(): string[] {
     return RouteManager.getHome().concat(['user-courses']);
   }
