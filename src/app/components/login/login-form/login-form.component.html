@@ -20,15 +20,17 @@
         </mat-form-field>
       </div>
 
-      <button class="mb-5" mat-raised-button color="primary"
-              (click)="login()">Zaloguj się</button>
+      <div class="mb-5">
+        <a class="mj-button-primary"
+           (click)="login()">Zaloguj się</a>
+      </div>
 
       <div class="d-flex align-items-center mb-4">
         <p class="me-2 mb-0">
           Nie masz jeszcze konta?
         </p>
         <a [routerLink]="RouteManager.getRegister()">
-          <button mat-raised-button color="primary">Zajerestruj się</button>
+          <a class="mj-button-primary">Zajerestruj się</a>
         </a>
       </div>
 
@@ -37,7 +39,7 @@
           Zapomniałeś hasła?
         </p>
         <a [routerLink]="RouteManager.getRecoverPassword()">
-          <button mat-raised-button color="primary">Przypomnij hasło</button>
+          <a class="mj-button-primary">Przypomnij hasło</a>
         </a>
       </div>
     </ng-container>

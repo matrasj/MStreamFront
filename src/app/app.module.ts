@@ -20,7 +20,6 @@ import {RegisterFormComponent} from "./components/login/register-form/register-f
 import { RecoverPasswordComponent } from './components/login/recover-password/recover-password.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import { CoursesListComponent } from './components/account/courses/courses-list.component';
 import {AuthenticationGuard} from "./guards/authentication.guard";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTabsModule} from "@angular/material/tabs";
@@ -36,13 +35,18 @@ import { QuestionCategoriesListComponent } from './components/recruitment-questi
 import {MatTreeModule} from "@angular/material/tree";
 import {MatRippleModule} from "@angular/material/core";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import { CoursesMainViewComponent } from './components/course/courses-main-view/courses-main-view.component';
-import { PromoVideoModalComponent } from './components/course/promo-viedo-modal/promo-video-modal.component';
+import { CoursesMainViewComponent } from './components/course-promo/courses-main-view/courses-main-view.component';
+import { PromoVideoModalComponent } from './components/course-promo/promo-viedo-modal/promo-video-modal.component';
 import {VgCoreModule} from "@videogular/ngx-videogular/core";
 import {VgControlsModule} from "@videogular/ngx-videogular/controls";
 import {VgOverlayPlayModule} from "@videogular/ngx-videogular/overlay-play";
 import {VgBufferingModule} from "@videogular/ngx-videogular/buffering";
 import {VgStreamingModule} from "@videogular/ngx-videogular/streaming";
+import { ProfileComponent } from './components/user/account/profile/profile.component';
+import { TransactionsHistoryComponent } from './components/user/account/transactions-history/transactions-history.component';
+import { AccountMainViewComponent } from './components/user/account/account-main-view/account-main-view.component';
+import { AccountSideNavComponent } from './components/user/account/account-side-nav/account-side-nav.component';
+import { EnrolledCoursesListComponent } from './components/user/courses/enrolled-courses-list/enrolled-courses-list.component';
 
 const routes: Routes = [
   { path: "recruitment-questions", component: RecruitmentQuestionsComponent, children: [
@@ -71,17 +75,18 @@ const routes: Routes = [
   { path: "login", component: LoginFormComponent },
   { path: "register", component: RegisterFormComponent },
   { path: "recover-password", component: RecoverPasswordComponent },
+  { path: "user-courses", component: EnrolledCoursesListComponent, canActivate: [AuthenticationGuard] },
   {
     path: "account",
+    component: AccountMainViewComponent,
     children: [
       {
-        path: '',
-        redirectTo: 'courses',
-        pathMatch: 'full'
+        path: 'profile',
+        component: ProfileComponent
       },
       {
-        path: 'courses',
-        component: CoursesListComponent
+        path: 'transactions-history',
+        component: TransactionsHistoryComponent
       }
     ],
     canActivate: [AuthenticationGuard]
@@ -108,13 +113,17 @@ const routes: Routes = [
     RegisterFormComponent,
     RecoverPasswordComponent,
     LoaderComponent,
-    CoursesListComponent,
     SolvedQuizComponent,
     QuizGenerationFormComponent,
     QuestionCategoriesMenuComponent,
     QuestionCategoriesListComponent,
     CoursesMainViewComponent,
-    PromoVideoModalComponent
+    PromoVideoModalComponent,
+    ProfileComponent,
+    TransactionsHistoryComponent,
+    AccountMainViewComponent,
+    AccountSideNavComponent,
+    EnrolledCoursesListComponent
   ],
   imports: [
     BrowserModule,
@@ -129,7 +138,8 @@ const routes: Routes = [
       innerStrokeWidth: 8,
       outerStrokeColor: "#78C000",
       innerStrokeColor: "#C7E596",
-      animationDuration: 300
+      animationDuration: 300,
+      subtitle: 'Wynik poprawnych odpowiedzi'
     }),
     BrowserAnimationsModule,
     MatIconModule,

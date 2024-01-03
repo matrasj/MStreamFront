@@ -58,7 +58,7 @@ export class LoginFormComponent implements OnInit {
           localStorage.setItem('username', res.username);
 
           this.toastr.success('Logowanie zakończyło się sukcesem')
-          this.router.navigate(RouteManager.getUserAccount());
+          this.router.navigate(RouteManager.getUserProfile());
         },
         error: (err) => {
           if (err.error?.message === 'EntityNotFoundException') {

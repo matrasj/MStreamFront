@@ -26,14 +26,6 @@ export class RouteManager {
     return RouteManager.getHome().concat(['recover-password']);
   }
 
-  public static getUserAccount(): string[] {
-    return RouteManager.getHome().concat(['account'])
-  }
-
-  public static getUserAccountCourses(): string[] {
-    return RouteManager.getUserAccount().concat(['courses']);
-  }
-
   public static getSolveQuiz(): string[] {
     return RouteManager.getRecruitmentQuestions().concat(['solving']);
   }
@@ -48,5 +40,18 @@ export class RouteManager {
 
   public static getQuestionsListForQuizCategory(quizCategoryId: number): string[] {
     return RouteManager.getQuestionsList().concat([`${quizCategoryId}`]);
+  }
+
+  // Account
+  private static getUserAccount(): string[] {
+    return RouteManager.getHome().concat(['account']);
+  }
+  public static getUserProfile(): string[] {
+    return RouteManager.getUserAccount().concat(['profile']);
+  }
+
+  // Courses
+  public static getUserCourses(): string[] {
+    return RouteManager.getHome().concat(['user-courses']);
   }
 }

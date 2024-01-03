@@ -1,11 +1,15 @@
 footer {
   background-color: #333;
   color: #fff;
-  padding: 14px;
+  padding: 2rem;
   text-align: center;
 }
 
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.footer-content p {
+  color: #f3f3f3;
 }

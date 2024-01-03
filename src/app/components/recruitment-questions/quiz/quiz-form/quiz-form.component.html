@@ -8,7 +8,7 @@
     <ng-container>
       <div class="d-flex align-items-center mb-3">
         <h1 class="me-4 mb-0">Quiz wielokrotnego wyboru, zaznacz wszystkie poprawne odpowiedzi</h1>
-        <button mat-raised-button color="accent"
+        <button class="mj-button-primary"
                 (click)="exportToPdf()">
           <div class="d-flex align-items-center">
             <mat-icon class="me-2">picture_as_pdf</mat-icon>
@@ -33,7 +33,13 @@
           </div>
         </div>
       </div>
-      <button mat-raised-button color="accent" (click)="submit()">Wyślij i sprawdź wynik</button>
+      <button class="mj-button-primary"
+              (click)="submit()">
+        <div class="d-flex align-items-center">
+          <span class="me-2">Wyślij i sprawdź wynik</span>
+          <mat-icon>send</mat-icon>
+        </div>
+      </button>
     </ng-container>
   </ng-container>
 </div>

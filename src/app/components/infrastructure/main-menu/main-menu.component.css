@@ -52,4 +52,8 @@
   .hamburger {
     display: block;
   }
+
+  .main-nav-button {
+    border-radius: 0;
+  }
 }

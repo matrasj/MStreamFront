@@ -18,6 +18,35 @@ body { margin: 0 }
   border-radius: 8px;
 }
 
+.mj-button-primary {
+  text-decoration: none;
+  background-color: #1a9086;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px 25px 25px 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mj-button-primary:hover {
+  background-color: #155e55;
+}
+
+/* Secondary Button Style */
+.mj-button-secondary {
+  text-decoration: none;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.mj-button-secondary:hover {
+  color: #555;
+}
+
 @media only screen and (max-width: 500px) {
   .form-con {
     padding: 1rem;
