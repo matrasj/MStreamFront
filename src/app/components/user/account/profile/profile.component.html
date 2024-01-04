@@ -6,7 +6,7 @@
 </div>
 
 <ng-template #personalDataTemplate>
-  <div class="mb-4">
+  <div class="mb-4 me-5">
     <div class="row w-100">
       <mat-form-field class="mb-2">
         <input matInput
@@ -40,7 +40,11 @@
 </ng-template>
 
 <ng-template #avatarImageTemplate>
-  <img src="assets/images/logo.png">
+  <div class="d-flex flex-column align-items-center">
+    <img class="avatar-img mb-2" src="assets/images/default_avatar.png">
+    <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+    <button class="mj-button-primary" (click)="fileInput.click()">Zmień avatara</button>
+  </div>
 </ng-template>
 
 <ng-template #loader>

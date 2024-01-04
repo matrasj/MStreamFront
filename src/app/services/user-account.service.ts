@@ -20,4 +20,8 @@ export class UserAccountService {
   public getUserAccountDataByEmail(email: string): Observable<UserAccountInformationPayloadModel> {
     return this.httpClient.get<UserAccountInformationPayloadModel>(`${this.resourceUrl}/email/${email}`);
   }
+
+  public changeAvatar(formData: FormData): Observable<UserAccountInformationPayloadModel> {
+    return this.httpClient.post<UserAccountInformationPayloadModel>(`${this.resourceUrl}/avatar`, formData);
+  }
 }

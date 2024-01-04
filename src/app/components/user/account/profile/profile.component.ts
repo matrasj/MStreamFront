@@ -90,4 +90,30 @@ export class ProfileComponent implements OnInit {
     }
     return email;
   }
+
+  public onFileSelected(): void {
+    const inputNode: any = document.querySelector('#file');
+
+    if (inputNode.files.length > 0) {
+      const file = inputNode.files[0];
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        const blob = new Blob([e.target.result], { type: file.type });
+        this.changeAvatarImage(blob);
+      };
+
+      reader.readAsArrayBuffer(file);
+    }
+  }
+
+  private changeAvatarImage(blob: Blob) {
+    const formData = new FormData();
+    formData.append('file', blob);
+    this.userAccountService.changeAvatar(formData).subscribe({
+      next: (res) => {
+        console.log(res);
+      }
+    })
+  }
 }
