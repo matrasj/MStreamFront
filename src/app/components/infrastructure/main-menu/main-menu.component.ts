@@ -24,7 +24,7 @@ export class MainMenuComponent implements OnInit {
 
   public logout(): void {
     this.authenticationService.logout();
-    this.router.navigate(RouteManager.getHome());
+    this.navigateAndCloseMenu(RouteManager.getHome());
     this.toastrService.success('Pomyślnie wylogowano użytkownika');
   }
 

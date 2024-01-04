@@ -79,7 +79,7 @@ export class RegisterFormComponent implements OnInit {
         this.showInfoAboutCheckingMail = true;
       },
       error: (err) => {
-        this.toastr.error('Wystąpił błąd podczas tworzenia użytkownika')
+        this.toastr.error('Wystąpił błąd podczas rejestracji konta');
       }
     })
   }

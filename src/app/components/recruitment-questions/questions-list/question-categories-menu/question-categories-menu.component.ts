@@ -26,10 +26,6 @@ export class QuestionCategoriesMenuComponent implements OnInit {
     this.fetchCategories();
   }
 
-  public isSelected(quizCategory: QuizCategoryModel): boolean {
-    return quizCategory.id === this.selectedCategory?.id;
-  }
-
   private fetchCategories(): void {
     this.componentState = ComponentStateEnum.LOADING;
     this.quizCategoryService.getQuizCategories()

@@ -1,6 +1,6 @@
-export interface LoginResponseModel {
+export interface AuthenticationPayloadResponse {
   jwtToken: string;
   refreshToken: string;
   expiresAt: string | Date;
-  username: string;
+  email: string;
 }

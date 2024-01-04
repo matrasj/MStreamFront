@@ -1,1 +1,48 @@
-<p>profile works!</p>
+<div class="d-flex align-items-start">
+  <ng-container *ngIf="componentState !== ComponentStateEnum.LOADING; else loader">
+    <ng-template [ngTemplateOutlet]="personalDataTemplate"></ng-template>
+    <ng-template [ngTemplateOutlet]="avatarImageTemplate"></ng-template>
+  </ng-container>
+</div>
+
+<ng-template #personalDataTemplate>
+  <div class="mb-4">
+    <div class="row w-100">
+      <mat-form-field class="mb-2">
+        <input matInput
+               placeholder="Twoje imię..."
+               [formControl]="firstName"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="mb-2">
+        <input matInput
+               placeholder="Twoje nazwisko..."
+               [formControl]="lastName"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="mb-2">
+        <input matInput
+               placeholder="Twój email..."
+               [formControl]="email"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="mb-2">
+        <input matInput
+               placeholder="Twój numer telefonu..."
+               [formControl]="phoneNumber"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #avatarImageTemplate>
+  <img src="assets/images/logo.png">
+</ng-template>
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>

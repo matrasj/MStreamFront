@@ -55,7 +55,7 @@ export class LoginFormComponent implements OnInit {
           localStorage.setItem('jwtToken', res.jwtToken);
           localStorage.setItem('refreshToken', res.refreshToken);
           localStorage.setItem('expiresAt', `${res.expiresAt}`);
-          localStorage.setItem('username', res.username);
+          localStorage.setItem('username', res.email);
 
           this.toastr.success('Logowanie zakończyło się sukcesem')
           this.router.navigate(RouteManager.getUserProfile());

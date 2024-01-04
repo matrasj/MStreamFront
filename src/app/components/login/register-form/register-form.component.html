@@ -36,16 +36,15 @@
       </div>
 
       <div class="row mb-2 max-w-input">
-        <mat-form-field>
-          <input matInput
-                 placeholder="Telefon"
-                 [formControl]="phoneNumberFormControl"
-                 [type]="'phoneNumber'"/>
+        <mat-form-field class="example-full-width">
+          <mat-label>Telefon</mat-label>
+          <span matPrefix>+48 &nbsp;</span>
+          <input [formControl]="phoneNumberFormControl" type="tel" matInput placeholder="555-555-1234">
+          <mat-icon matSuffix>phone</mat-icon>
         </mat-form-field>
       </div>
 
-      <button mat-raised-button color="primary"
-              class="mb-5"
+      <button class="mj-button-primary mb-4"
               (click)="submitForm()">
         Zajerestruj się
       </button>
@@ -54,9 +53,8 @@
         <p class="me-2 mb-0">
           Masz już konto?
         </p>
-        <a [routerLink]="RouteManager.getLogin()">
-          <button mat-raised-button color="primary">Zaloguj się</button>
-        </a>
+        <button class="mj-button-primary"
+                [routerLink]="RouteManager.getLogin()">Zaloguj się</button>
       </div>
     </ng-container>
   </div>

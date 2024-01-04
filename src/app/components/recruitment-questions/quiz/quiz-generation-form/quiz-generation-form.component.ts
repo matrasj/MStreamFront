@@ -58,7 +58,7 @@ export class QuizGenerationFormComponent implements OnInit {
       .pipe(finalize(() => this.componentState = ComponentStateEnum.PREVIEW))
       .subscribe({
         next: (res) => this.quizCategories = res,
-        error: (err) => this.toastrService.error('Wystąpił błąd podczas pobierania kategori quizów')
+        error: (err) => this.toastrService.error('Wystąpił błąd podczas pobierania kategorii')
       });
   }
 

@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {LoginRequestModel} from "../models/login/login-request.model";
 import {Observable} from "rxjs";
-import {LoginResponseModel} from "../models/login/login-response.model";
+import {AuthenticationPayloadResponse} from "../models/login/authentication-payload.response";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class AuthenticationService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public login(loginRequest: LoginRequestModel): Observable<LoginResponseModel> {
-    return this.httpClient.post<LoginResponseModel>(`${this.resourceUrl}/login`, loginRequest);
+  public login(loginRequest: LoginRequestModel): Observable<AuthenticationPayloadResponse> {
+    return this.httpClient.post<AuthenticationPayloadResponse>(`${this.resourceUrl}/login`, loginRequest);
   }
 
   public logout(): void {
