@@ -15,3 +15,13 @@
 .correct {
   background-color: #C7E596;
 }
+
+@media screen and (max-width: 800px) {
+  .con {
+    flex-direction: column !important;
+  }
+
+  .menu-con {
+    width: 100%;
+  }
+}

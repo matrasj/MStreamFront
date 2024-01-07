@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {RouterModule, Routes} from "@angular/router";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { MainFooterComponent } from './components/infrastructure/main-footer/main-footer.component';
 import {MatIconModule} from "@angular/material/icon";
@@ -20,7 +20,7 @@ import {RegisterFormComponent} from "./components/login/register-form/register-f
 import { RecoverPasswordComponent } from './components/login/recover-password/recover-password.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {AuthenticationGuard} from "./guards/authentication.guard";
+import {AuthenticationGuard} from "./infrastructure/guards/authentication.guard";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatSelectModule} from "@angular/material/select";
@@ -47,6 +47,7 @@ import { TransactionsHistoryComponent } from './components/user/account/transact
 import { AccountMainViewComponent } from './components/user/account/account-main-view/account-main-view.component';
 import { AccountSideNavComponent } from './components/user/account/account-side-nav/account-side-nav.component';
 import { EnrolledCoursesListComponent } from './components/user/courses/enrolled-courses-list/enrolled-courses-list.component';
+import {AuthInterceptor} from "./infrastructure/interceptors/auth.interceptor";
 
 const routes: Routes = [
   { path: "recruitment-questions", component: RecruitmentQuestionsComponent, children: [
@@ -163,7 +164,13 @@ const routes: Routes = [
     VgStreamingModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      multi: true,
+      useClass: AuthInterceptor
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

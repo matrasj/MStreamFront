@@ -1,7 +1,7 @@
 <div *ngIf="componentState !== ComponentStateEnum.LOADING; else loader">
   <div class="d-flex flex-column">
     <div *ngFor="let quizCategory of quizCategories"
-         class="mb-2 custom-tab"
+         class="mb-2 mj-tab"
          [routerLink]="RouteManager.getQuestionsListForQuizCategory(quizCategory.id)"
          [ngClass]="{ 'active': selectedCategory?.id === quizCategory.id}"
          (click)="selectedCategory = quizCategory"
