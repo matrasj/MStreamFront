@@ -3,4 +3,5 @@ export interface UserAccountInformationPayloadModel {
   lastname: string;
   email: string;
   phoneNumber: string;
+  avatarImg: string;
 }

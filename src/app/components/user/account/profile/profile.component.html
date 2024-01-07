@@ -41,10 +41,16 @@
 
 <ng-template #avatarImageTemplate>
   <div class="d-flex flex-column align-items-center">
-    <img class="avatar-img mb-2" src="assets/images/default_avatar.png">
+    <img *ngIf="userAccountData?.avatarImg; else defaultAvatarImage"
+         class="mb-2 avatar-img"
+         [src]="'data:image/png;base64,' + userAccountData?.avatarImg"/>
     <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
     <button class="mj-button-primary" (click)="fileInput.click()">Zmień avatara</button>
   </div>
+</ng-template>
+
+<ng-template #defaultAvatarImage>
+  <img class="avatar-img mb-2" src="assets/images/default_avatar.png">
 </ng-template>
 
 <ng-template #loader>

@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
   public readonly ComponentStateEnum = ComponentStateEnum;
   public userDataFormGroup: FormGroup | null = null;
   public componentState: ComponentStateEnum = ComponentStateEnum.PREVIEW;
-  private userAccountData: UserAccountInformationPayloadModel | null = null;
+  public userAccountData: UserAccountInformationPayloadModel | null = null;
   constructor(private authenticationService: AuthenticationService,
               private userAccountService: UserAccountService,
               private router: Router,
@@ -108,12 +108,15 @@ export class ProfileComponent implements OnInit {
   }
 
   private changeAvatarImage(blob: Blob) {
+    this.componentState = ComponentStateEnum.LOADING;
     const formData = new FormData();
     formData.append('file', blob);
-    this.userAccountService.changeAvatar(formData).subscribe({
+    this.userAccountService.changeAvatar(formData, this.authenticationService.getUsername() as string).subscribe({
       next: (res) => {
-        console.log(res);
-      }
+        this.userAccountData = res;
+        this.componentState = ComponentStateEnum.PREVIEW;
+      },
+      error: err => this.toastrService.error('Wystąpił błąd podczas zmiany avatara')
     })
   }
 }

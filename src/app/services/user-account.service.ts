@@ -21,7 +21,7 @@ export class UserAccountService {
     return this.httpClient.get<UserAccountInformationPayloadModel>(`${this.resourceUrl}/email/${email}`);
   }
 
-  public changeAvatar(formData: FormData): Observable<UserAccountInformationPayloadModel> {
-    return this.httpClient.post<UserAccountInformationPayloadModel>(`${this.resourceUrl}/avatar`, formData);
+  public changeAvatar(formData: FormData, email: string): Observable<UserAccountInformationPayloadModel> {
+    return this.httpClient.post<UserAccountInformationPayloadModel>(`${this.resourceUrl}/email/${email}/avatar`, formData);
   }
 }
