@@ -48,11 +48,12 @@ body { margin: 0 }
 }
 
 .mj-tab {
+  width: 100%;
   padding: 12px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   border-radius: 25px;
-  min-width: 120px;
+  min-width: max-content;
   text-align: center;
   background-color: #ffffff;
   color: #333;
@@ -82,4 +83,17 @@ p {
 html, body, h1, h2, h3, h4, h5, p, span, button {
   height: 100%;
   font-family: 'Merriweather', serif !important;
+}
+
+
+.templates-con {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+  .templates-con {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
 }

@@ -47,6 +47,7 @@ export class RegisterFormComponent implements OnInit {
   public get phoneNumberFormControl(): UntypedFormControl {
     return <UntypedFormControl>this.registrationForm?.get('phoneNumber');
   }
+
   private initForm(): void {
     this.registrationForm = this.formBuilder.group({
       firstName: [null, Validators.required],

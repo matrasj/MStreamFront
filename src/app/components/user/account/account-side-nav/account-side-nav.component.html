@@ -1,13 +1,11 @@
-<div>
-  <div class="d-flex flex-column">
-    <div class="mb-2 mj-tab"
-         [routerLink]="RouteManager.getUserProfile()"
-         [routerLinkActive]="['active']">{{ 'Profil' }}
-    </div>
-    <div class="mb-2 mj-tab"
-         [routerLink]="RouteManager.getTransactionsHistory()"
-         [routerLinkActive]="['active']">{{ 'Historia transakcji' }}
-    </div>
+<div class="row d-flex flex-column">
+  <div class="mb-2 mj-tab"
+       [routerLink]="RouteManager.getUserProfile()"
+       [routerLinkActive]="['active']">{{ 'Profil' }}
+  </div>
+  <div class="mb-2 mj-tab"
+       [routerLink]="RouteManager.getTransactionsHistory()"
+       [routerLinkActive]="['active']">{{ 'Historia transakcji' }}
   </div>
 </div>
 

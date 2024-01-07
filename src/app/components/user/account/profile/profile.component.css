@@ -28,7 +28,32 @@ img {
 }
 
 .avatar-img {
-  width: 8rem;
+  width: 9rem;
   border-radius: 50%;
-  height: 8rem;
+  height: 9rem;
 }
+
+.templates-con {
+  align-items: start;
+}
+
+
+@media screen and (max-width: 800px) {
+  .sidenav-con {
+    width: 100%;
+    margin-right: 0 !important;
+  }
+
+  .personal-data-con {
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .flex-con {
+    align-items: center !important;
+    flex-direction: column-reverse;
+  }
+}
+

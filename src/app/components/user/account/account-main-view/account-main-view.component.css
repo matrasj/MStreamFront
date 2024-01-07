@@ -1,0 +1,10 @@
+.templates-con {
+  align-items: start;
+}
+
+@media screen and (max-width: 800px) {
+  .sidenav-con {
+    width: 100%;
+    margin-right: 0 !important;
+  }
+}

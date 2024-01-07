@@ -1,13 +1,23 @@
-<div class="d-flex align-items-start">
+<div class="templates-con">
   <ng-container *ngIf="componentState !== ComponentStateEnum.LOADING; else loader">
-    <ng-template [ngTemplateOutlet]="personalDataTemplate"></ng-template>
-    <ng-template [ngTemplateOutlet]="avatarImageTemplate"></ng-template>
+    <div class="d-flex align-items-start flex-con">
+      <ng-template [ngTemplateOutlet]="personalDataTemplate"></ng-template>
+      <ng-template [ngTemplateOutlet]="avatarImageTemplate"></ng-template>
+    </div>
   </ng-container>
 </div>
 
 <ng-template #personalDataTemplate>
-  <div class="mb-4 me-5">
+  <div class="personal-data-con mb-4 me-5">
     <div class="row w-100">
+      <mat-form-field class="mb-2">
+        <input matInput
+               placeholder="Twój email..."
+               readonly
+               [formControl]="email"
+        />
+      </mat-form-field>
+
       <mat-form-field class="mb-2">
         <input matInput
                placeholder="Twoje imię..."
@@ -23,18 +33,13 @@
       </mat-form-field>
 
       <mat-form-field class="mb-2">
-        <input matInput
-               placeholder="Twój email..."
-               [formControl]="email"
-        />
+        <mat-label>Telefon</mat-label>
+        <span matPrefix>+48 &nbsp;</span>
+        <input [formControl]="phoneNumber" type="tel" matInput placeholder="Twój numer telefonu...">
+        <mat-icon matSuffix>phone</mat-icon>
       </mat-form-field>
 
-      <mat-form-field class="mb-2">
-        <input matInput
-               placeholder="Twój numer telefonu..."
-               [formControl]="phoneNumber"
-        />
-      </mat-form-field>
+      <button class="mj-button-primary" (click)="submit()">Zapisz dane profilu</button>
     </div>
   </div>
 </ng-template>

@@ -107,14 +107,40 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  public submit(): void {
+    if (this.userDataFormGroup?.invalid) {
+      this.toastrService.info('Uzupełnij wszystkie wymagane informacje')
+      this.userDataFormGroup?.markAllAsTouched();
+      return;
+    }
+    this.componentState = ComponentStateEnum.LOADING;
+
+    const changedPersonalData: UserAccountInformationPayloadModel = {
+        firstname: this.firstName.value,
+        lastname: this.lastName.value,
+        phoneNumber: this.phoneNumber.value
+      } as UserAccountInformationPayloadModel;
+    this.userAccountService.changePersonalData(changedPersonalData, this.userAccountData?.email as string)
+      .pipe(finalize(() => this.componentState = ComponentStateEnum.PREVIEW))
+      .subscribe({
+        next: res => {
+          this.userAccountData = res;
+          this.toastrService.success('Pomyślnie zmieniono dane dotyczące profilu');
+        },
+        error: err => this.toastrService.error('Wystąpił błąd podczas edycji danych profilu')
+      });
+  }
+
   private changeAvatarImage(blob: Blob) {
     this.componentState = ComponentStateEnum.LOADING;
     const formData = new FormData();
     formData.append('file', blob);
-    this.userAccountService.changeAvatar(formData, this.authenticationService.getUsername() as string).subscribe({
-      next: (res) => {
+    this.userAccountService.changeAvatar(formData, this.authenticationService.getUsername() as string)
+      .pipe(finalize(() => this.componentState = ComponentStateEnum.PREVIEW))
+      .subscribe({
+      next: res => {
         this.userAccountData = res;
-        this.componentState = ComponentStateEnum.PREVIEW;
+        this.toastrService.success('Pomyślnie zmieniono avatar profilu');
       },
       error: err => this.toastrService.error('Wystąpił błąd podczas zmiany avatara')
     })
