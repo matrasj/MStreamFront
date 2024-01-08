@@ -32,4 +32,8 @@ export class UserAccountService {
   public toggleAssignedForNewsletter(email: string): Observable<UserAccountInformationPayloadModel> {
     return this.httpClient.patch<UserAccountInformationPayloadModel>(`${this.resourceUrl}/newsletter/email/${email}`, email);
   }
+
+  public isAdmin(): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.resourceUrl}/is-admin`);
+  }
 }

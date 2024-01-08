@@ -19,5 +19,4 @@ export class AuthenticationGuard {
     this.router.navigate(['/login']);
     return false;
   }
-
 }

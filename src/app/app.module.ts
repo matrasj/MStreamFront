@@ -49,6 +49,8 @@ import { AccountSideNavComponent } from './components/user/account/account-side-
 import { EnrolledCoursesListComponent } from './components/user/courses/enrolled-courses-list/enrolled-courses-list.component';
 import {AuthInterceptor} from "./infrastructure/interceptors/auth.interceptor";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { NewsletterAdminPanelComponent } from './components/admin/newsletter-admin-panel/newsletter-admin-panel.component';
+import {AdminGuard} from "./infrastructure/guards/admin.guard";
 
 const routes: Routes = [
   { path: "recruitment-questions", component: RecruitmentQuestionsComponent, children: [
@@ -101,6 +103,16 @@ const routes: Routes = [
   {
     path: 'courses',
     component: CoursesMainViewComponent
+  },
+  {
+    path: 'admin',
+    children: [
+      {
+        path: 'newsletter',
+        component: NewsletterAdminPanelComponent
+      }
+    ],
+    canActivate: [AuthenticationGuard, AdminGuard]
   }
 ];
 
@@ -125,7 +137,8 @@ const routes: Routes = [
     TransactionsHistoryComponent,
     AccountMainViewComponent,
     AccountSideNavComponent,
-    EnrolledCoursesListComponent
+    EnrolledCoursesListComponent,
+    NewsletterAdminPanelComponent
   ],
   imports: [
     BrowserModule,

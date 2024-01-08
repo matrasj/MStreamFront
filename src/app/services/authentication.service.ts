@@ -11,7 +11,6 @@ export class AuthenticationService {
   private resourceUrl: string = '/user/api/authentication';
   constructor(private httpClient: HttpClient) {
   }
-
   public login(loginRequest: LoginRequestModel): Observable<AuthenticationPayloadResponse> {
     return this.httpClient.post<AuthenticationPayloadResponse>(`${this.resourceUrl}/login`, loginRequest);
   }
@@ -19,6 +18,7 @@ export class AuthenticationService {
   public logout(): void {
     localStorage.clear();
   }
+
   public getJwtToken(): string | null {
     return localStorage.getItem('jwtToken');
   }
