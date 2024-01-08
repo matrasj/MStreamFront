@@ -8,38 +8,51 @@
 </div>
 
 <ng-template #personalDataTemplate>
-  <div class="personal-data-con mb-4 me-5">
-    <div class="row w-100">
-      <mat-form-field class="mb-2">
-        <input matInput
-               placeholder="Twój email..."
-               readonly
-               [formControl]="email"
-        />
-      </mat-form-field>
+  <div class="d-flex flex-column">
+    <div class="mb-4">
+      <h2>Newsletter</h2>
+      <mat-slide-toggle
+        (change)="toggleNewsletter()"
+        [checked]="!!userAccountData?.isAssignedForNewsletter"
+      >
+        Chcę otrzymywać informację newsletter.
+      </mat-slide-toggle>
+    </div>
 
-      <mat-form-field class="mb-2">
-        <input matInput
-               placeholder="Twoje imię..."
-               [formControl]="firstName"
-        />
-      </mat-form-field>
+    <div class="personal-data-con mb-4 me-5">
+      <h2>Dane profilu</h2>
+      <div class="row w-100">
+        <mat-form-field class="mb-2">
+          <input matInput
+                 placeholder="Twój email..."
+                 readonly
+                 [formControl]="email"
+          />
+        </mat-form-field>
 
-      <mat-form-field class="mb-2">
-        <input matInput
-               placeholder="Twoje nazwisko..."
-               [formControl]="lastName"
-        />
-      </mat-form-field>
+        <mat-form-field class="mb-2">
+          <input matInput
+                 placeholder="Twoje imię..."
+                 [formControl]="firstName"
+          />
+        </mat-form-field>
 
-      <mat-form-field class="mb-2">
-        <mat-label>Telefon</mat-label>
-        <span matPrefix>+48 &nbsp;</span>
-        <input [formControl]="phoneNumber" type="tel" matInput placeholder="Twój numer telefonu...">
-        <mat-icon matSuffix>phone</mat-icon>
-      </mat-form-field>
+        <mat-form-field class="mb-2">
+          <input matInput
+                 placeholder="Twoje nazwisko..."
+                 [formControl]="lastName"
+          />
+        </mat-form-field>
 
-      <button class="mj-button-primary" (click)="submit()">Zapisz dane profilu</button>
+        <mat-form-field class="mb-2">
+          <mat-label>Telefon</mat-label>
+          <span matPrefix>+48 &nbsp;</span>
+          <input [formControl]="phoneNumber" type="tel" matInput placeholder="Twój numer telefonu...">
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+
+        <button class="mj-button-primary" (click)="submit()">Zapisz dane profilu</button>
+      </div>
     </div>
   </div>
 </ng-template>

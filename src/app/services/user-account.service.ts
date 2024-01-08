@@ -28,4 +28,8 @@ export class UserAccountService {
   public changePersonalData(changedPersonalData: UserAccountInformationPayloadModel, email: string): Observable<UserAccountInformationPayloadModel> {
     return this.httpClient.put<UserAccountInformationPayloadModel>(`${this.resourceUrl}/email/${email}`, changedPersonalData);
   }
+
+  public toggleAssignedForNewsletter(email: string): Observable<UserAccountInformationPayloadModel> {
+    return this.httpClient.patch<UserAccountInformationPayloadModel>(`${this.resourceUrl}/newsletter/email/${email}`, email);
+  }
 }

@@ -131,6 +131,20 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  public toggleNewsletter(): void {
+    this.componentState = ComponentStateEnum.LOADING;
+    this.userAccountService.toggleAssignedForNewsletter(this.userAccountData?.email as string)
+      .pipe(finalize(() => this.componentState = ComponentStateEnum.PREVIEW))
+      .subscribe({
+        next: res => {
+          this.userAccountData = res;
+          this.toastrService.success(this.userAccountData?.isAssignedForNewsletter
+            ? 'Pomyślnie zapisano się na nweslettera' : 'Pomyślnie wypisano się z newslettera');
+        },
+        error: err => this.toastrService.error('Wystąpił błąd podczas zapisywania się na newsletter')
+      });
+  }
+
   private changeAvatarImage(blob: Blob) {
     this.componentState = ComponentStateEnum.LOADING;
     const formData = new FormData();

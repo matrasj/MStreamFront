@@ -4,4 +4,5 @@ export interface UserAccountInformationPayloadModel {
   email: string;
   phoneNumber: string;
   avatarImg: string;
+  isAssignedForNewsletter: boolean;
 }

@@ -48,6 +48,7 @@ import { AccountMainViewComponent } from './components/user/account/account-main
 import { AccountSideNavComponent } from './components/user/account/account-side-nav/account-side-nav.component';
 import { EnrolledCoursesListComponent } from './components/user/courses/enrolled-courses-list/enrolled-courses-list.component';
 import {AuthInterceptor} from "./infrastructure/interceptors/auth.interceptor";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 const routes: Routes = [
   { path: "recruitment-questions", component: RecruitmentQuestionsComponent, children: [
@@ -129,8 +130,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes, {
-    useHash: true,
-    paramsInheritanceStrategy: 'always'
+      useHash: true,
+      paramsInheritanceStrategy: 'always'
     }),
     HttpClientModule,
     NgCircleProgressModule.forRoot({
@@ -161,7 +162,8 @@ const routes: Routes = [
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
-    VgStreamingModule
+    VgStreamingModule,
+    MatSlideToggleModule
   ],
   providers: [
     {
